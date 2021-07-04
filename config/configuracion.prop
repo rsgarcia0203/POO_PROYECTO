@@ -1,0 +1,6 @@
+mail.smtp.host = smtp.gmail.com
+mail.smtp.port = 587
+mail.smtp.user = ronnydarkmaster@gmail.com
+mail.smtp.password = 02091999R
+mail.smtp.stattIs.enable = true
+mail.smtp.auth = true
