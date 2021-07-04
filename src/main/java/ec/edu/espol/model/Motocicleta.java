@@ -29,7 +29,7 @@ public class Motocicleta extends Vehiculo{
         String correo = sc.next();
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
-        Vehiculo nuevo = new Vehiculo(nombres,apellidos,organizacion,correo,clave);
-        return nuevo;
+        //Vehiculo nuevo = new Vehiculo(nombres,apellidos,organizacion,correo,clave);
+        return null;
     }
 }

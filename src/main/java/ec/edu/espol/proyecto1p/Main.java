@@ -79,7 +79,6 @@ public class Main {
               
        
         Scanner sn = new Scanner(System.in);
-        boolean salir = false;
         int opcion; //Guardaremos la opcion del usuario
         int subopcion;
         do{
@@ -94,6 +93,7 @@ public class Main {
             
             switch(opcion){
                 case 1:
+                {
                     do{
                         System.out.println("==OPCIONES DEL VENDEDOR==");
                         System.out.println("1. Registrar un nuevo vendedor");
@@ -107,9 +107,11 @@ public class Main {
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
                                 Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
-                                if(v1.getCorreo())
+                                if(v1.getCorreo() == null){
                                     
-                                else
+                                }
+                                    
+                                
                                     
                             case 2:
                                 
@@ -123,7 +125,7 @@ public class Main {
                                 System.out.println("El submenu solo tiene 4 opciones");
                         }
                     }
-                    while(!sub_salir);
+                    while(subopcion != 4);
                 }
                     
                 case 2:
@@ -150,14 +152,14 @@ public class Main {
 
                     
                 case 3:
-                    salir = true;
+                    System.out.println("Gracias");;
                     
                 default:
                     System.out.println("El programa solo tiene 3 opciones");
-           }while(!salir);
+           }
           
-       }
+       }while(opcion != 3);
     
     }
-    
+}   
    
