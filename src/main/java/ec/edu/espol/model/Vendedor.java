@@ -120,7 +120,7 @@ public class Vendedor {
             while (sc.hasNextLine()){
                 String linea = sc.next();
                 String [] arreglo = linea.split("\\|");
-                Vendedor v = new Vendedor(arreglo[0], arreglo[1],arreglo[2], arreglo[3], Integer.parseInt(arreglo[4]));
+                Vendedor v = new Vendedor(arreglo[0], arreglo[1],arreglo[2], arreglo[3], arreglo[4]);
                 vendedor.add(v);
             }
         }catch(Exception e){
