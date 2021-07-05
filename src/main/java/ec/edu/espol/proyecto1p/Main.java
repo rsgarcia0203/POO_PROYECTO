@@ -107,11 +107,13 @@ public class Main {
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
                                 Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
-                                if(v1.getCorreo() == null){
-                                    
-                                }
-                                    
-                                
+                                ArrayList<Vendedor> vendedor = Vendedor.readFile("vendedor.txt");
+                                for(int i=0; i<vendedor.size(); i++)
+                                   if (vendedor.get(i).equals(v1.getCorreo()))
+                                      System.out.println("No se ha podido registrar");
+                                                                                      
+                                   else
+                                      System.out.println("Vendedor registrado");
                                     
                             case 2:
                                 
