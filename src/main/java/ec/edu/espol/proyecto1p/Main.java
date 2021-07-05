@@ -102,6 +102,7 @@ public class Main {
                                    }
                                    else{
                                        c1.saveFile("comprador.txt");
+                                       c1.saveFile("comprador.txt");
                                        System.out.println("Comprador registrado!");
                                    }
                                 }
