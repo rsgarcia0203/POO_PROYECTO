@@ -91,7 +91,16 @@ public class Main {
                         subopcion = sn.nextInt();
                         switch(subopcion){
                             case 1:
-                                break;
+                                System.out.println("\n=REGISTRAR=");
+                                Comprador c1 = Comprador.registrarNuevoComprador(sc);
+                                ArrayList<Comprador> comprador = Comprador.readFile("comprador.txt");
+                                for (int i=0;i<comprador.size();i++){
+                                   if (comprador.get(i).equals(c1.getCorreo()))
+                                       System.out.println("Correo repetido, no se puede registrar!");
+                                   else
+                                       c1.saveFile("comprador.txt");
+                                       System.out.println("Comprador registrado!")
+                                }
                             case 2:
                                 break;
                             case 3:
