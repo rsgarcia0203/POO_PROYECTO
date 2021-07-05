@@ -8,20 +8,11 @@ package ec.edu.espol.proyecto1p;
 
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
 import ec.edu.espol.model.Mail;
 import ec.edu.espol.model.Vendedor;
 import java.security.InvalidParameterException;
-import java.util.Properties;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 /**
  *
  * @author rsgar
@@ -31,21 +22,10 @@ public class Main {
  
     /**
      * @param args the command line arguments
-     */ 
-
-    public static void main(String[] args) throws MessagingException {
-        // TODO code application logic here
-        Mail m;
-        try {
-            m = new Mail("config/configuracion.prop");
-            
-            m.enviarEmail("Test","Hola mundo","rsgarcia@espol.edu.ec");
-            System.out.println("Correo enviado");
-        }catch(InvalidParameterException | IOException ex){
-            System.out.println(ex.getMessage());
-        }
-              
-       
+     */
+    
+    public static void main(String[] args) {
+        // TODO code application logic here                
         Scanner sn = new Scanner(System.in);
         int opcion; //Guardaremos la opcion del usuario
         int subopcion;
@@ -127,7 +107,6 @@ public class Main {
            }
           
        }while(opcion != 3);
-    //rsgar
+    
     }
 }   
-   
