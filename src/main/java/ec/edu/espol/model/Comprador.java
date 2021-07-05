@@ -111,7 +111,21 @@ public class Comprador {
             System.out.println(e.getMessage());
         }
     }
-    
+    public static ArrayList<Comprador> readFile(String nomFile){ 
+        
+        ArrayList<Comprador> comprador = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while (sc.hasNextLine()){
+                String linea = sc.next();
+                String [] arreglo = linea.split("\\|");
+                Comprador c = new Comprador(arreglo[0], arreglo[1],arreglo[2], arreglo[3], arreglo[4]);
+                comprador.add(c);
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return comprador;
+    }
     
     
      public static Comprador registrarNuevoComprador(Scanner sc)
