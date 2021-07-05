@@ -54,9 +54,13 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
-                                if(v1.getCorreo() == null){
-                                    
+                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sc);
+                                ArrayList<Vendedor> vendedor = Vendedor.readFile("vendedor.txt");
+                                for (int i=0;i<vendedor.size();i++){
+                                   if (vendedor.get(i).equals(v1.getCorreo()))
+                                       System.out.println("Correo repetido, no se puede registrar!");
+                                   else
+                                       System.out.println("Vendedor registrado!"
                                 }
                                     
                                 
