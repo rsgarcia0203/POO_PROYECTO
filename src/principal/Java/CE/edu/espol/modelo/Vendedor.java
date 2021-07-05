@@ -108,9 +108,24 @@ public class Vendedor {
             pw.println(nombres+"|"+apellidos+"|"+organizacion+"|"+correo+"|"+clave);
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); 
         }
     }
+    public static ArrayList<Vendedor> readFile(String nomFile){
+        ArrayList<Vendedor> vendedor = ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while(sc.hasNextLine());
+            String Linea = sc.nextLine();
+            String[] arreglo = linea.split("\\|");
+            Vendedor v = new Vendedor(arreglo[0], arreglo[1], arreglo[2],Integer.parseInt(arreglo[4])));
+            vendedor.add(v);
+            }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return vendedor;
+        }
+    
     
     public static Vendedor registrarNuevoVendedor(Scanner sc)
      {
