@@ -31,39 +31,7 @@ public class Main {
  
     /**
      * @param args the command line arguments
-     */
-    
-    public static void enviarConGMail(String destinatario, String asunto, String cuerpo) {      
-    // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-
-        Properties props;
-        Session session;
-        props = System.getProperties();
-        props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
-        props.put("mail.smtp.user", "ronnydarkmaster@gmail.com");
-        props.put("mail.smtp.clave", "000000000000");    //La clave de la cuenta
-        props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
-        props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
-        props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
-
-        session = Session.getDefaultInstance(props);
-        MimeMessage message = new MimeMessage(session);
-
-        try {
-            message.setFrom(new InternetAddress("ronnydarkmaster@gmail.com"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));   //Se podrían añadir varios de la misma manera
-            message.setSubject(asunto);
-            message.setText(cuerpo);
-            try (Transport transport = session.getTransport("smtp")) {
-                transport.connect("smtp.gmail.com", "ronnydarkmaster@gmail.com", "00000000000");
-                transport.sendMessage(message, message.getAllRecipients());
-            }
-        }
-        catch (MessagingException me) {
-            me.printStackTrace();   //Si se produce un error
-        }
-    }
-    
+     */ 
 
     public static void main(String[] args) throws MessagingException {
         // TODO code application logic here
