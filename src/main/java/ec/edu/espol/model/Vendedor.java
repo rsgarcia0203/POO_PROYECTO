@@ -112,6 +112,23 @@ public class Vendedor {
         }
     }
     
+    
+    public static ArrayList<Vendedor> readFile(String nomFile){ 
+        
+        ArrayList<Vendedor> vendedor = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomFile))){
+            while (sc.hasNextLine()){
+                String linea = sc.next();
+                String [] arreglo = linea.split("\\|");
+                Vendedor v = new Vendedor(arreglo[0], arreglo[1],arreglo[2], arreglo[3], Integer.parseInt(arreglo[4]));
+                vendedor.add(v);
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return vendedor;
+    }
+    
     public static Vendedor registrarNuevoVendedor(Scanner sc)
      {
         System.out.println("Ingrese los nombres: ");
