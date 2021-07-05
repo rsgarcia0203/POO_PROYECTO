@@ -59,10 +59,13 @@ public class Main {
                                 Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
                                 ArrayList<Vendedor> vendedor = Vendedor.readFile("vendedor.txt");
                                 for (int i=0;i<vendedor.size();i++){
-                                   if (vendedor.get(i).getCorreo().equals(v1.getCorreo()))
-                                       System.out.println("Correo repetido, no se puede registrar!");
-                                   else
-                                       System.out.println("Vendedor registrado!");
+                                   if (!(vendedor.get(i).getCorreo().equals(v1.getCorreo()))){
+                                        v1.saveFile("vendedor.txt");
+                                        System.out.println("Vendedor registrado!");
+                                   }
+                                   else{
+                                        System.out.println("Correo repetido, no se puede registrar!");   
+                                   }
                                 }
                                     
                                 
@@ -97,13 +100,12 @@ public class Main {
                                 Comprador c1 = Comprador.registrarNuevoComprador(sn);
                                 ArrayList<Comprador> comprador = Comprador.readFile("comprador.txt");
                                 for (int i=0;i<comprador.size();i++){
-                                   if (comprador.get(i).getCorreo().equals(c1.getCorreo())){
-                                       System.out.println("Correo repetido, no se puede registrar!");
+                                   if (!(comprador.get(i).getCorreo().equals(c1.getCorreo()))){
+                                        c1.saveFile("comprador.txt");
+                                        System.out.println("Comprador registrado!");
                                    }
                                    else{
-                                       c1.saveFile("comprador.txt");
-                                       c1.saveFile("comprador.txt");
-                                       System.out.println("Comprador registrado!");
+                                        System.out.println("Correo repetido, no se puede registrar!");                                       
                                    }
                                 }
                             case 2:
