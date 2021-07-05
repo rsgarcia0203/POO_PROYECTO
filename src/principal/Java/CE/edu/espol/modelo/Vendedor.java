@@ -124,7 +124,7 @@ public class Vendedor {
             System.out.println(e.getMessage());
         }
         return vendedor;
-        }
+    }
     
     
     public static Vendedor registrarNuevoVendedor(Scanner sc)
