@@ -23,8 +23,6 @@ import javax.mail.internet.MimeMessage;
 public class Mail {
     private Properties props;
     private Session session;
-    private String remitente = "rgarcia3info@gmail.com";
-    private String clave = "00000";
     
     public Mail(String ruta) throws IOException
     {
@@ -45,15 +43,15 @@ public class Mail {
             "mail.smtp.host",
             "mail.smtp.port",
             "mail.smtp.user",
-            "mail.smtp.password",
-            "mail.smtp.stattIs.enable",
+            "mail.smtp.clave",
+            "mail.smtp.starttls.enable",
             "mail.smtp.auth",
         };
         
         for (int i = 0; i < keys.length; i++)
         {
             if(this.props.get(keys[i]) == null){
-                throw new InvalidParameterException("No existe la clave "+keys[i]);
+                throw new InvalidParameterException("No existe la clave " + keys[i]);
             }
         }
     }
@@ -62,13 +60,15 @@ public class Mail {
     {
         Session session = Session.getDefaultInstance(this.props);
         MimeMessage contenedor = new MimeMessage(session);
+        
         contenedor.setFrom(new InternetAddress((String) this.props.get("mail.smtp.user")));
         contenedor.addRecipient(Message.RecipientType.TO, new InternetAddress(correo));
         contenedor.setSubject(asunto);
         contenedor.setText(mensaje);
         Transport t = session.getTransport("smtp");
-        t.connect((String) this.props.get("mail.smtp.user"),(String) this.props.get("mail.smtp.password"));
+        t.connect("smtp.gmail.com",(String) this.props.get("mail.smtp.user"),(String) this.props.get("mail.smtp.password"));
         t.sendMessage(contenedor, contenedor.getAllRecipients());
+        t.close();
     }
     
     
