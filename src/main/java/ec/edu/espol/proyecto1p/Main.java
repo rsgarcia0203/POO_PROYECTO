@@ -59,7 +59,7 @@ public class Main {
                                 Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
                                 ArrayList<Vendedor> vendedor = Vendedor.readFile("vendedor.txt");
                                 for (int i=0;i<vendedor.size();i++){
-                                   if (vendedor.get(i).equals(v1.getCorreo()))
+                                   if (vendedor.get(i).getCorreo().equals(v1.getCorreo()))
                                        System.out.println("Correo repetido, no se puede registrar!");
                                    else
                                        System.out.println("Vendedor registrado!");
