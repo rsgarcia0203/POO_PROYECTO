@@ -105,7 +105,7 @@ public class Comprador {
     
     public void saveFile(String nomFile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
-            pw.println(nombres+"|"+apellidos+"|"+organizacion+"|"+correo+"|"+clave);
+            pw.println(nombres+"|"+apellidos+"|"+organizacion+"|"+correo+"|"+toHexString(getSHA(clave)));
         }
         catch (Exception e){
             System.out.println(e.getMessage());
