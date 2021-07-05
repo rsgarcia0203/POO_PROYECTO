@@ -6,11 +6,13 @@
 package ec.edu.espol.proyecto1p;
 
 
+import ec.edu.espol.model.Comprador;
 import java.io.IOException;
 import java.util.Scanner;
 import ec.edu.espol.model.Mail;
 import ec.edu.espol.model.Vendedor;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import javax.mail.MessagingException;
 
 /**
@@ -54,13 +56,13 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sc);
+                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
                                 ArrayList<Vendedor> vendedor = Vendedor.readFile("vendedor.txt");
                                 for (int i=0;i<vendedor.size();i++){
                                    if (vendedor.get(i).equals(v1.getCorreo()))
                                        System.out.println("Correo repetido, no se puede registrar!");
                                    else
-                                       System.out.println("Vendedor registrado!"
+                                       System.out.println("Vendedor registrado!");
                                 }
                                     
                                 
@@ -92,14 +94,16 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Comprador c1 = Comprador.registrarNuevoComprador(sc);
+                                Comprador c1 = Comprador.registrarNuevoComprador(sn);
                                 ArrayList<Comprador> comprador = Comprador.readFile("comprador.txt");
                                 for (int i=0;i<comprador.size();i++){
-                                   if (comprador.get(i).equals(c1.getCorreo()))
+                                   if (comprador.get(i).getCorreo().equals(c1.getCorreo())){
                                        System.out.println("Correo repetido, no se puede registrar!");
-                                   else
+                                   }
+                                   else{
                                        c1.saveFile("comprador.txt");
-                                       System.out.println("Comprador registrado!")
+                                       System.out.println("Comprador registrado!");
+                                   }
                                 }
                             case 2:
                                 break;
