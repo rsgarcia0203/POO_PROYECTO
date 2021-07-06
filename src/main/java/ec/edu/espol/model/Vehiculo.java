@@ -193,6 +193,16 @@ public class Vehiculo {
         m.saveFile(nomfile);
         
     }
+    public void saveFile(String nomfile){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
+        {
+            pw.println(this.placa+"|"+this.marca+"|"+this.modelo+"|"+this.tipo_motor+"|"+this.anio+"|"+this.recorrido+"|"+this.color+"|"+this.tipo_combustible+"|"+this.vidrios+"|"+this.transmision+"|"+this.Traccion+"|"+this.precio);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
      public void saveFile(String nomfile ){
         if (nomfile=="Motocicleta.txt"){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File("Motocicleta.txt"),true)))
