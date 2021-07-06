@@ -70,8 +70,21 @@ public class Main {
                                     
        
                             case 2:
-                                 System.out.println("\n=ACEPTAR OFERTA=");
-                                 Vendedor v2 = Vendedor.aceptarOferta(sn);
+                                System.out.println("\n=ACEPTAR OFERTA=");
+                                System.out.println("Ingrese correo: ");
+                                String correo = sn.nextLine();
+                                System.out.println("Ingrese clave: ");
+                                String clave1 = sn.nextLine();
+                                ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
+                                for (int i=0;i<vendedores.size();i++){
+                                    if (Vendedor.getSHA(clave1).equals(vendedores.get(i).getClave())){
+                                    System.out.println("Ingrese la placa del vechiculo: ");
+                                    String placa = sn.nextLine(); 
+                                    
+                                    }
+                                
+                                    
+                                }
                                  
                                  
                                 
@@ -100,7 +113,7 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Comprador c1 = Comprador.registrarNuevoComprador(sc);
+                                Comprador c1 = Comprador.registrarNuevoComprador(sn);
                                 ArrayList<Comprador> comprador = Comprador.readFile("comprador.txt");
                                 for (int i=0;i<comprador.size();i++){
                                    if (!(comprador.get(i).getCorreo().equals(c1.getCorreo()))){
