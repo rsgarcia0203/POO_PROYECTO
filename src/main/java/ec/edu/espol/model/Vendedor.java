@@ -129,6 +129,11 @@ public class Vendedor {
         return vendedor;
     }
     
+    @Override
+    public String toString() {
+        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + clave ;
+    }
+    
    
     public static Vendedor registrarNuevoVendedor(Scanner sc)
      {
