@@ -132,12 +132,12 @@ public class Main {
                             case 3:
                                 System.out.println("\n=ACEPTAR OFERTA=");
                                 System.out.println("Ingrese correo: ");
-                                String correo = sn.nextLine();
+                                String correo1 = sn.nextLine();
                                 System.out.println("Ingrese clave: ");
                                 String clave1 = sn.nextLine();
-                                ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
-                                for (int i=0;i<vendedores.size();i++){
-                                    if (Vendedor.getSHA(clave1).equals(vendedores.get(i).getClave())){
+                                ArrayList<Vendedor> vendedores1 = Vendedor.readFile("vendedor.txt");
+                                for (int i=0;i<vendedores1.size();i++){
+                                    if (Vendedor.getSHA(clave1).equals(vendedores1.get(i).getClave())){
                                     System.out.println("Ingrese la placa del vechiculo: ");
                                     String placa = sn.nextLine();                                     
                                     
