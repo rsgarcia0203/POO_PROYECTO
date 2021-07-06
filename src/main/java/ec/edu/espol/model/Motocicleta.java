@@ -41,18 +41,36 @@ public class Motocicleta extends Vehiculo{
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
         Motocicleta m = new Motocicleta(placa,marca,modelo,tipodeMotor,anio,recorrido,color,TipoCombustible,precio);
-        m.saveFile("Motocicleta.txt");
+        m.saveFile(nomfile);
         
     }
-     public void saveFile(String nomfile){
+    public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
-            pw.println(this.id+"|"+this.codigo+"|"+this.nombre);
+            pw.println(this.placa+"|"+this.marca+"|"+this.modelo+"|"+this.tipo_motor+"|"+this.anio+"|"+this.recorrido+"|"+this.color+"|"+this.tipo_combustible+"|"+this.precio);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
+        }
+    public static ArrayList<Motocicleta> readFile(String nomfile){
+        ArrayList<Motocicleta> motocicleta = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                // linea = "1|20201010|eduardo|cruz"
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                Motocicleta e;
+                e = new Motocicleta(tokens[0],tokens[1],tokens[2],tokens[3],Integer.parseInt(tokens[4]),Double.parseDouble(tokens[5]),tokens[6],tokens[7],Double.parseDouble(tokens[8]));
+                motocicleta.add(e);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return motocicleta;
     }
-    
+
     
 }
