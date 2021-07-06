@@ -44,4 +44,13 @@ public class Camioneta extends Vehiculo{
     public void setTraccion(String traccion) {
         this.traccion = traccion;
     }
+    public void saveFile(String nomfile){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
+        {
+            pw.println(this.placa+"|"+this.marca+"|"+this.modelo+"|"+this.tipo_motor+"|"+this.anio+"|"+this.recorrido+"|"+this.color+"|"+this.tipo_combustible+"|"+this.vidrios+"|"+this.transmision+"|"+this.traccion+"|"+this.precio);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        }
 }
