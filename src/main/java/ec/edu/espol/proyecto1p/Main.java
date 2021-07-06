@@ -56,7 +56,7 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sn);
+                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sc);
                                 ArrayList<Vendedor> vendedor = Vendedor.readFile("vendedor.txt");
                                 for (int i=0;i<vendedor.size();i++){
                                    if (!(vendedor.get(i).getCorreo().equals(v1.getCorreo()))){
@@ -68,9 +68,12 @@ public class Main {
                                    }
                                 }
                                     
-                                
-                                    
+       
                             case 2:
+                                 System.out.println("\n=ACEPTAR OFERTA=");
+                                 Vendedor v2 = Vendedor.aceptarOferta(sc);
+                                 
+                                 
                                 
                                 break;
                             case 3:
@@ -97,7 +100,7 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Comprador c1 = Comprador.registrarNuevoComprador(sn);
+                                Comprador c1 = Comprador.registrarNuevoComprador(sc);
                                 ArrayList<Comprador> comprador = Comprador.readFile("comprador.txt");
                                 for (int i=0;i<comprador.size();i++){
                                    if (!(comprador.get(i).getCorreo().equals(c1.getCorreo()))){
