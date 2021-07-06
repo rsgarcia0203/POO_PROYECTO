@@ -65,7 +65,7 @@ public class Automovil extends Vehiculo{
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
         Automovil m=new Automovil(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,precio);
-        
+        m.saveFile(nomfile);
     }
     
     
