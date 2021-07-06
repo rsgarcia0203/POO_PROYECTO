@@ -44,6 +44,34 @@ public class Camioneta extends Vehiculo{
     public void setTraccion(String traccion) {
         this.traccion = traccion;
     }
+    public static void nextCamioneta(Scanner sc, String nomfile){
+        System.out.println("Ingrese la placa: ");
+        String placa = sc.next();
+        System.out.println("Ingrese la marca: ");
+        String marca = sc.next();
+        System.out.println("Ingrese el Modelo: ");
+        String modelo = sc.next();
+        System.out.println("Ingrese el tipo de motor: ");
+        String tipodeMotor = sc.next();
+        System.out.println("Ingrese el anio: ");
+        int anio = sc.nextInt();
+        System.out.println("Ingrese el recorrido: ");
+        double recorrido =sc.nextDouble();
+        System.out.println("Ingrese el color: ");
+        String color =sc.next();
+        System.out.println("Ingrese el tipo de combustible: ");
+        String TipoCombustible =sc.next();
+        System.out.println("Ingrese el tipo de vidrio: ");
+        String vidrio =sc.next();
+        System.out.println("Ingrese el tipo de transmision: ");
+        String transmision =sc.next();
+        System.out.println("Ingrese el tipo de traccion: ");
+        String traccion =sc.next();
+        System.out.println("Ingrese el precio: ");
+        String precio =sc.next();
+        Automovil m=new Automovil(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
+        
+    }
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
