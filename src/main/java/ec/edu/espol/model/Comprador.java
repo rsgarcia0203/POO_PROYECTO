@@ -128,7 +128,7 @@ public class Comprador {
     }
     @Override
     public String toString() {
-        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + toHexString(getSHA(clave)) ;
+        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + clave) ;
     }
     
     
