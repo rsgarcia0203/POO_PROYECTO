@@ -49,7 +49,7 @@ public class Camioneta extends Vehiculo{
     public void setTraccion(String traccion) {
         this.traccion = traccion;
     }
-    public static void nextCamioneta(Scanner sc, String nomfile){
+    public static Camioneta nextCamioneta(Scanner sc){
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
         System.out.println("Ingrese la marca: ");
@@ -75,7 +75,7 @@ public class Camioneta extends Vehiculo{
         System.out.println("Ingrese el precio: ");
         Double precio =sc.nextDouble();
         Camioneta c=new Camioneta(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
-        c.saveFile(nomfile);
+        return c;
     }
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
