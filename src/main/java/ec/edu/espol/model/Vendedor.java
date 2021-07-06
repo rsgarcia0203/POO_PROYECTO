@@ -129,10 +129,7 @@ public class Vendedor {
         return vendedor;
     }
     
-    @Override
-    public String toString() {
-        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + toHexString(getSHA(clave)) ;
-    }
+   
     public static Vendedor registrarNuevoVendedor(Scanner sc)
      {
         System.out.println("Ingrese los nombres: ");
