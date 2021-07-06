@@ -104,4 +104,9 @@ public class Camioneta extends Vehiculo{
         }
         return camioneta;
     }
+    @Override
+    public String toString() {
+        return "Camioneta{" + "placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.anio + ", recorrido=" + super.recorrido + 
+                ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision +", traccion="+ this.traccion+ ", precio=" + precio + '}';
+    }
 }
