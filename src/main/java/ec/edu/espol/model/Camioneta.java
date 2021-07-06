@@ -73,7 +73,7 @@ public class Camioneta extends Vehiculo{
         System.out.println("Ingrese el tipo de traccion: ");
         String traccion =sc.next();
         System.out.println("Ingrese el precio: ");
-        String precio =sc.next();
+        Double precio =sc.nextDouble();
         Camioneta c=new Camioneta(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
         c.saveFile(nomfile);
     }
