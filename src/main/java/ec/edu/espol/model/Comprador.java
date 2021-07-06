@@ -126,6 +126,10 @@ public class Comprador {
         }
         return comprador;
     }
+    @Override
+    public String toString() {
+        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + toHexString(getSHA(clave)) ;
+    }
     
     
      public static Comprador registrarNuevoComprador(Scanner sc)
