@@ -81,4 +81,22 @@ public class Camioneta extends Vehiculo{
             System.out.println(e.getMessage());
         }
         }
+    public static ArrayList<Camioneta> readFile(String nomfile){
+        ArrayList<Camioneta> camioneta = new ArrayList<>();
+        try(Scanner sc = new Scanner(new File(nomfile))){
+            while(sc.hasNextLine())
+            {
+                // linea = "1|20201010|eduardo|cruz"
+                String linea = sc.nextLine();
+                String[] tokens = linea.split("\\|");
+                Camioneta c;
+                c = new Camioneta(tokens[0],tokens[1],tokens[2],tokens[3],Integer.parseInt(tokens[4]),Double.parseDouble(tokens[5]),tokens[6],tokens[7],tokens[8],tokens[9],tokens[10],Double.parseDouble(tokens[11]));
+                camioneta.add(c);
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return camioneta;
+    }
 }
