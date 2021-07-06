@@ -99,5 +99,10 @@ public class Automovil extends Vehiculo{
         }
         return automovil;
     }
+    @Override
+    public String toString() {
+        return "Vehiculo{" + "placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.anio + ", recorrido=" + super.recorrido + 
+                ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision + ", precio=" + precio + '}';
+    }
 }
 
