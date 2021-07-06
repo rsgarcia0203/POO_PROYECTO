@@ -5,6 +5,10 @@
  */
 package ec.edu.espol.model;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,19 +21,38 @@ public class Motocicleta extends Vehiculo{
         super(placa, marca, modelo, tipo_motor, año, recorrido, color, tipo_combustible, precio);
     }
     
-     public static Vehiculo registrarNuevoVehiculo(Scanner sc)
-     {
-        System.out.println("Ingrese los nombres: ");
-        String nombres = sc.next();
-        System.out.println("Ingrese los apellidos: ");
-        String apellidos = sc.next();
-        System.out.println("Ingrese el nombre de la organización: ");
-        String organizacion = sc.next();
-        System.out.println("Ingrese su dirección de correo electrónico: ");
-        String correo = sc.next();
-        System.out.println("Ingrese su clave: ");
-        String clave = sc.next();
-        //Vehiculo nuevo = new Vehiculo(nombres,apellidos,organizacion,correo,clave);
-        return null;
+    public static void nextMotocicleta(Scanner sc, String nomfile){
+        System.out.println("Ingrese la placa: ");
+        String placa = sc.next();
+        System.out.println("Ingrese la marca: ");
+        String marca = sc.next();
+        System.out.println("Ingrese el Modelo: ");
+        String modelo = sc.next();
+        System.out.println("Ingrese el tipo de motor: ");
+        String tipodeMotor = sc.next();
+        System.out.println("Ingrese el anio: ");
+        int anio = sc.nextInt();
+        System.out.println("Ingrese el recorrido: ");
+        double recorrido =sc.nextDouble();
+        System.out.println("Ingrese el color: ");
+        String color =sc.next();
+        System.out.println("Ingrese el tipo de combustible: ");
+        String TipoCombustible =sc.next();
+        System.out.println("Ingrese el precio: ");
+        double precio =sc.nextDouble();
+        Motocicleta m = new Motocicleta(placa,marca,modelo,tipodeMotor,anio,recorrido,color,TipoCombustible,precio);
+        m.saveFile("Motocicleta.txt");
+        
     }
+     public void saveFile(String nomfile){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
+        {
+            pw.println(this.id+"|"+this.codigo+"|"+this.nombre);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
 }
