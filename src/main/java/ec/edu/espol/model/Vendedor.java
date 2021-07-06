@@ -150,10 +150,4 @@ public class Vendedor {
     }
     
 }
-    public static Vendedor aceptarOferta(Scanner sc){
-        System.out.println("Ingrese correo: ");
-        String correo = sc.nextLine();
-        System.out.println("Ingrese clave: ");
-        String clave = sc.nextLine();
-        return new Vendedor(correo,clave);
-    }
+    
