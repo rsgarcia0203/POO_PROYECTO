@@ -16,32 +16,60 @@ public class Vehiculo {
     protected String marca;
     protected String modelo;
     protected String tipo_motor;
-    protected int año;
+    protected int anio;
     protected double recorrido;
     protected String color;
     protected String tipo_combustible;
+    protected String vidrios;
+    protected String transmision;
+    protected String traccion;
     protected double precio;
-    
-    public Vehiculo(String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, double precio){
+
+    //constructor para autos
+    public Vehiculo(String placa, String marca, String modelo, String tipo_motor, int anio, double recorrido, String color, String tipo_combustible, String vidrios, String transmision, double precio) {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.tipo_motor = tipo_motor;
-        this.año = año;
+        this.anio = anio;
+        this.recorrido = recorrido;
+        this.color = color;
+        this.tipo_combustible = tipo_combustible;
+        this.vidrios = vidrios;
+        this.transmision = transmision;
+        this.precio = precio;
+    }
+    //constructor para Motocicletas
+    public Vehiculo(String placa, String marca, String modelo, String tipo_motor, int anio, double recorrido, String color, String tipo_combustible, double precio) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.tipo_motor = tipo_motor;
+        this.anio = anio;
         this.recorrido = recorrido;
         this.color = color;
         this.tipo_combustible = tipo_combustible;
         this.precio = precio;
     }
+    //constructor para Camionetas
+    public Vehiculo(String placa, String marca, String modelo, String tipo_motor, int anio, double recorrido, String color, String tipo_combustible, String vidrios, String transmision, String Traccion, double precio) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.tipo_motor = tipo_motor;
+        this.anio = anio;
+        this.recorrido = recorrido;
+        this.color = color;
+        this.tipo_combustible = tipo_combustible;
+        this.vidrios = vidrios;
+        this.transmision = transmision;
+        this.Traccion = Traccion;
+        this.precio = precio;
+    }
     
-    //Constructor para camionetas
-    
-    
-    //Constructor para motos
-   
 
     public String getPlaca() {
-        return this.placa;
+        return placa;
     }
 
     public void setPlaca(String placa) {
@@ -49,7 +77,7 @@ public class Vehiculo {
     }
 
     public String getMarca() {
-        return this.marca;
+        return marca;
     }
 
     public void setMarca(String marca) {
@@ -57,7 +85,7 @@ public class Vehiculo {
     }
 
     public String getModelo() {
-        return this.modelo;
+        return modelo;
     }
 
     public void setModelo(String modelo) {
@@ -65,31 +93,31 @@ public class Vehiculo {
     }
 
     public String getTipo_motor() {
-        return this.tipo_motor;
+        return tipo_motor;
     }
 
     public void setTipo_motor(String tipo_motor) {
         this.tipo_motor = tipo_motor;
     }
 
-    public int getAño() {
-        return this.año;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setAño(int año) {
-        this.año = año;
+    public void setAnio(int anio) {
+        this.anio = anio;
     }
 
     public double getRecorrido() {
-        return this.recorrido;
+        return recorrido;
     }
 
-    public void setRecorrido(float recorrido) {
+    public void setRecorrido(double recorrido) {
         this.recorrido = recorrido;
     }
 
     public String getColor() {
-        return this.color;
+        return color;
     }
 
     public void setColor(String color) {
@@ -97,21 +125,69 @@ public class Vehiculo {
     }
 
     public String getTipo_combustible() {
-        return this.tipo_combustible;
+        return tipo_combustible;
     }
 
     public void setTipo_combustible(String tipo_combustible) {
         this.tipo_combustible = tipo_combustible;
     }
 
-    public double getPrecio() {
-        return this.precio;
+    public String getVidrios() {
+        return vidrios;
     }
 
-    public void setPrecio(float precio) {
+    public void setVidrios(String vidrios) {
+        this.vidrios = vidrios;
+    }
+
+    public String getTransmision() {
+        return transmision;
+    }
+
+    public void setTransmision(String transmision) {
+        this.transmision = transmision;
+    }
+
+    public String getTraccion() {
+        return Traccion;
+    }
+
+    public void setTraccion(String Traccion) {
+        this.Traccion = Traccion;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
     
+  
+    public static void nextVehiculo(Scanner sc, String nomfile){
+        System.out.println("Ingrese la placa: ");
+        String placa = sc.next();
+        System.out.println("Ingrese la marca: ");
+        String marca = sc.next();
+        System.out.println("Ingrese el Modelo: ");
+        String modelo = sc.next();
+        System.out.println("Ingrese el tipo de motor: ");
+        String tipodeMotor = sc.next();
+        System.out.println("Ingrese el anio: ");
+        int anio = sc.nextInt();
+        System.out.println("Ingrese el recorrido: ");
+        double recorrido =sc.nextDouble();
+        System.out.println("Ingrese el color: ");
+        String color =sc.next();
+        System.out.println("Ingrese el tipo de combustible: ");
+        String TipoCombustible =sc.next();
+        System.out.println("Ingrese el precio: ");
+        double precio =sc.nextDouble();
+        Vehiculo v = new Vehiculo(placa,marca,modelo,tipodeMotor,anio,recorrido,color,TipoCombustible,vidrios,transmision,traccion,precio);
+        m.saveFile(nomfile);
+        
+    }
     
   
 }
