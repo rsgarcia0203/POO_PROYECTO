@@ -58,7 +58,6 @@ public class Motocicleta extends Vehiculo{
         try(Scanner sc = new Scanner(new File(nomfile))){
             while(sc.hasNextLine())
             {
-                // linea = "1|20201010|eduardo|cruz"
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
                 Motocicleta e;
