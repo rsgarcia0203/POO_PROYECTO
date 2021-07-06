@@ -21,7 +21,7 @@ public class Motocicleta extends Vehiculo{
         super(placa, marca, modelo, tipo_motor, año, recorrido, color, tipo_combustible, precio);
     }
     
-    public static void nextMotocicleta(Scanner sc, String nomfile){
+    public static Motocicleta nextMotocicleta(Scanner sc){
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
         System.out.println("Ingrese la marca: ");
@@ -41,7 +41,7 @@ public class Motocicleta extends Vehiculo{
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
         Motocicleta m = new Motocicleta(placa,marca,modelo,tipodeMotor,anio,recorrido,color,TipoCombustible,precio);
-        m.saveFile(nomfile);
+        return m;
         
     }
     public void saveFile(String nomfile){
