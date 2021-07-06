@@ -42,7 +42,7 @@ public class Automovil extends Vehiculo{
     }
 
     
-    public static void nextAutomovil(Scanner sc, String nomfile){
+    public static Automovil nextAutomovil(Scanner sc){
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
         System.out.println("Ingrese la marca: ");
@@ -66,7 +66,7 @@ public class Automovil extends Vehiculo{
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
         Automovil m=new Automovil(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,precio);
-        m.saveFile(nomfile);
+        return m;
     }
     
     
@@ -86,7 +86,6 @@ public class Automovil extends Vehiculo{
         try(Scanner sc = new Scanner(new File(nomfile))){
             while(sc.hasNextLine())
             {
-                // linea = "1|20201010|eduardo|cruz"
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
                 Automovil e;
