@@ -70,6 +70,12 @@ public class Main {
                                     
        
                             case 2:
+                                
+                                 
+                                 
+                                
+                                break;
+                            case 3:
                                 System.out.println("\n=ACEPTAR OFERTA=");
                                 System.out.println("Ingrese correo: ");
                                 String correo = sn.nextLine();
@@ -79,17 +85,13 @@ public class Main {
                                 for (int i=0;i<vendedores.size();i++){
                                     if (Vendedor.getSHA(clave1).equals(vendedores.get(i).getClave())){
                                     System.out.println("Ingrese la placa del vechiculo: ");
-                                    String placa = sn.nextLine(); 
+                                    String placa = sn.nextLine();                                     
                                     
                                     }
                                 
                                     
                                 }
-                                 
-                                 
-                                
-                                break;
-                            case 3:
+                          
                                 break;
                             case 4:
                                 sub_salir = true;
