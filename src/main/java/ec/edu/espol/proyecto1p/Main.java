@@ -70,6 +70,60 @@ public class Main {
                                     
        
                             case 2:
+                                System.out.println("\n=INGRESAR VEHICULO=");
+                                System.out.println("Ingrese correo: ");
+                                String correo = sn.nextLine();
+                                System.out.println("Ingrese clave: ");
+                                String clave = sn.nextLine();
+                                ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
+                                for (int i=0;i<vendedores.size();i++){
+                                    if (Vendedor.getSHA(clave).equals(vendedores.get(i).getClave())){
+                                        System.out.println("Ingrese tipo de vechiculo(auto/motocicleta/camioneta): ");  
+                                        String tipo = sn.nextLine();
+                                        if (tipo.equals("auto")){
+                                            Automovil au = Automovil.nextAutomovil(sn);
+                                            ArrayList<Automovil> automovil = Automovil.readFile("automovil.txt");
+                                            for (int j=0; j<automovil.size();j++){
+                                                if (au.getPlaca().equals(automovil.get(j).getPlaca())){
+                                                    System.out.println("Eror, placa existente en el sistema");
+                                                }
+                                                
+                                                au.saveFile("automovil.txt");
+                                            }
+                                       
+                                        }
+                                        
+                                        if (tipo.equals("motocicleta")){
+                                            Motocicleta mo = Motocicleta.nextMotocicleta(sn);
+                                            ArrayList<Motocicleta> motocicleta = Motocicleta.readFile("motocicleta.txt");
+                                            for (int j=0; j<motocicleta.size();j++){
+                                                if (mo.getPlaca().equals(motocicleta.get(j).getPlaca())){
+                                                    System.out.println("Error, placa existente en el sistema");
+                                                }
+                                                
+                                                mo.saveFile("motocicleta.txt");
+                                            }
+                                            
+                                        }
+                                        if (tipo.equals("camioneta")){
+                                            Camioneta ca = Camioneta.nextCamioneta(sn);
+                                            ArrayList<Camioneta> camioneta = Camioneta.readFile("camioneta.txt");
+                                            for (int j=0; j<camioneta.size();j++){
+                                                if (ca.getPlaca().equals(camioneta.get(j).getPlaca())){
+                                                    System.out.println("Error, placa existente en el sistema");
+                                                }
+                                                
+                                                ca.saveFile("camioneta.txt");
+                                            }
+                                            
+                                            
+                                        }
+                                    
+                                    }
+                                    else 
+                                        System.out.println("Clave incorrecta");
+                                      
+                                }
                                 
                                  
                                  
