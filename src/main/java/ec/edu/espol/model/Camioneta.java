@@ -69,8 +69,8 @@ public class Camioneta extends Vehiculo{
         String traccion =sc.next();
         System.out.println("Ingrese el precio: ");
         String precio =sc.next();
-        Automovil m=new Automovil(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
-        
+        Camioneta c=new Camioneta(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
+        c.saveFile(nomfile);
     }
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
