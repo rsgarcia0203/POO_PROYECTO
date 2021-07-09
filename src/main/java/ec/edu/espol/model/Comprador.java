@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,18 +21,28 @@ import java.util.Scanner;
  * @author rsgar
  */
 public class Comprador {
+    int ID;
     String nombres;
     String apellidos;
     String organizacion;
     String correo;
     String clave;
 
-    public Comprador(String nombres, String apellidos, String organizacion, String correo, String clave) {
+    public Comprador(int ID, String nombres, String apellidos, String organizacion, String correo, String clave) {
+        this.ID = ID;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.organizacion = organizacion;
         this.correo = correo;
         this.clave = clave;
+    }
+
+    public int getID() {
+        return this.ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getNombres() {
@@ -72,40 +84,10 @@ public class Comprador {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    //funcion Hash
-    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
-    { 
-        // Static getInstance method is called with hashing SHA 
-        MessageDigest md = MessageDigest.getInstance("SHA-256"); 
-  
-        // digest() method called 
-        // to calculate message digest of an input 
-        // and return array of byte
-        return md.digest(input.getBytes(StandardCharsets.UTF_8)); 
-    }
-    
-    public static String toHexString(byte[] hash)
-    {
-        // Convert byte array into signum representation 
-        BigInteger number = new BigInteger(1, hash); 
-  
-        // Convert message digest into hex value 
-        StringBuilder hexString = new StringBuilder(number.toString(16)); 
-  
-        // Pad with leading zeros
-        while (hexString.length() < 32) 
-        { 
-            hexString.insert(0, '0'); 
-        } 
-  
-        return hexString.toString(); 
-    }
-    //
-    
+        
     public void saveFile(String nomFile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
-            pw.println(nombres+"|"+apellidos+"|"+organizacion+"|"+correo+"|"+toHexString(getSHA(clave)));
+            pw.println(this.ID+"|"+this.nombres+"|"+this.apellidos+"|"+this.organizacion+"|"+this.correo+"|"+Util.toHexString(Util.getSHA(this.clave)));
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -118,7 +100,7 @@ public class Comprador {
             while (sc.hasNextLine()){
                 String linea = sc.next();
                 String [] arreglo = linea.split("\\|");
-                Comprador c = new Comprador(arreglo[0], arreglo[1],arreglo[2], arreglo[3], arreglo[4]);
+                Comprador c = new Comprador(Integer.parseInt(arreglo[0]),arreglo[1], arreglo[2],arreglo[3], arreglo[4], arreglo[5]);
                 comprador.add(c);
             }
         }catch(Exception e){
@@ -126,14 +108,25 @@ public class Comprador {
         }
         return comprador;
     }
-    @Override
-    public String toString() {
-        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + clave) ;
+    
+    public static Comprador searchByID(ArrayList<Comprador> compradores, int id)
+    {
+        for(Comprador c : compradores)
+        {
+            if(c.ID == id)
+                return c;
+        }
+        return null;
     }
     
+    @Override
+    public String toString() {
+        return  this.ID + ", " + this.nombres + ", " + this.apellidos + ", "+ this.organizacion +", "+ this.correo+ ", " + this.clave;
+    }
     
-     public static Comprador registrarNuevoComprador(Scanner sc)
+     public static Comprador registrarNuevoComprador(Scanner sc, String nomfile)
      {
+        int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
         String nombres = sc.next();
         System.out.println("Ingrese los apellidos: ");
@@ -144,7 +137,7 @@ public class Comprador {
         String correo = sc.next();
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
-        Comprador nuevo = new Comprador(nombres,apellidos,organizacion,correo,clave);
+        Comprador nuevo = new Comprador(id,nombres,apellidos,organizacion,correo,clave);
         return nuevo;
     }
 }

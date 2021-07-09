@@ -8,6 +8,7 @@ package ec.edu.espol.model;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,31 +16,52 @@ import java.util.Scanner;
  * @author rsgar
  */
 public class Vehiculo {
+    protected int ID;
+    protected int IDvendedor;
     protected String placa;
     protected String marca;
     protected String modelo;
     protected String tipo_motor;
-    protected int anio;
+    protected int año;
     protected double recorrido;
     protected String color;
     protected String tipo_combustible;
     protected double precio;
-
-    public Vehiculo(String placa, String marca, String modelo, String tipo_motor, int anio, double recorrido, String color, String tipo_combustible, double precio) {
+    protected Vendedor vendedor;
+    
+    public Vehiculo(int ID, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, double precio){
+        this.IDvendedor = IDvendedor;
+        this.ID = ID;
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
         this.tipo_motor = tipo_motor;
-        this.anio = anio;
+        this.año = año;
         this.recorrido = recorrido;
         this.color = color;
         this.tipo_combustible = tipo_combustible;
         this.precio = precio;
+        this.vendedor = null;
     }
-    
 
+    public int getID() {
+        return this.ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getIDvendedor() {
+        return this.IDvendedor;
+    }
+
+    public void setIDvendedor(int IDvendedor) {
+        this.IDvendedor = IDvendedor;
+    }
+       
     public String getPlaca() {
-        return placa;
+        return this.placa;
     }
 
     public void setPlaca(String placa) {
@@ -47,7 +69,7 @@ public class Vehiculo {
     }
 
     public String getMarca() {
-        return marca;
+        return this.marca;
     }
 
     public void setMarca(String marca) {
@@ -55,7 +77,7 @@ public class Vehiculo {
     }
 
     public String getModelo() {
-        return modelo;
+        return this.modelo;
     }
 
     public void setModelo(String modelo) {
@@ -63,31 +85,31 @@ public class Vehiculo {
     }
 
     public String getTipo_motor() {
-        return tipo_motor;
+        return this.tipo_motor;
     }
 
     public void setTipo_motor(String tipo_motor) {
         this.tipo_motor = tipo_motor;
     }
 
-    public int getAnio() {
-        return anio;
+    public int getAño() {
+        return this.año;
     }
 
-    public void setAnio(int anio) {
-        this.anio = anio;
+    public void setAño(int año) {
+        this.año = año;
     }
 
     public double getRecorrido() {
-        return recorrido;
+        return this.recorrido;
     }
 
-    public void setRecorrido(double recorrido) {
+    public void setRecorrido(float recorrido) {
         this.recorrido = recorrido;
     }
 
     public String getColor() {
-        return color;
+        return this.color;
     }
 
     public void setColor(String color) {
@@ -95,7 +117,7 @@ public class Vehiculo {
     }
 
     public String getTipo_combustible() {
-        return tipo_combustible;
+        return this.tipo_combustible;
     }
 
     public void setTipo_combustible(String tipo_combustible) {
@@ -103,12 +125,29 @@ public class Vehiculo {
     }
 
     public double getPrecio() {
-        return precio;
+        return this.precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
+
+    public Vendedor getVendedor() {
+        return this.vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
     
-  
+    public static Vehiculo searchByID(ArrayList<Vehiculo> vehiculos, int id)
+    {
+        for(Vehiculo v : vehiculos)
+        {
+            if(v.ID == id)
+                return v;
+        }
+        return null;
+    }
+    
 }

@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -13,26 +14,41 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest; 
 import java.security.NoSuchAlgorithmException; 
+import java.util.ArrayList;
 
 /**
  *
  * @author rsgar
  */
 public class Vendedor {
+    int ID;
     String nombres;
     String apellidos;
     String organizacion;
     String correo;
     String clave;
+    ArrayList<Vehiculo> vehiculos;
+    ArrayList<Oferta> ofertas;
 
-    public Vendedor(String nombres, String apellidos, String organizacion, String correo, String clave) {
+    public Vendedor(int ID, String nombres, String apellidos, String organizacion, String correo, String clave) {
+        this.ID = ID;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.organizacion = organizacion;
         this.correo = correo;
         this.clave = clave;
+        this.vehiculos = new ArrayList<>();
+        this.ofertas = new ArrayList<>();
+    }
+    
+    public int getID() {
+        return this.ID;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    
     public String getNombres() {
         return this.nombres;
     }
@@ -72,40 +88,26 @@ public class Vendedor {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
-    //funcion Hash
-    public static byte[] getSHA(String input) throws NoSuchAlgorithmException
-    { 
-        // Static getInstance method is called with hashing SHA 
-        MessageDigest md = MessageDigest.getInstance("SHA-256"); 
-  
-        // digest() method called 
-        // to calculate message digest of an input 
-        // and return array of byte
-        return md.digest(input.getBytes(StandardCharsets.UTF_8)); 
+
+    public ArrayList<Vehiculo> getVehiculos() {
+        return this.vehiculos;
     }
-    
-    public static String toHexString(byte[] hash)
-    {
-        // Convert byte array into signum representation 
-        BigInteger number = new BigInteger(1, hash); 
-  
-        // Convert message digest into hex value 
-        StringBuilder hexString = new StringBuilder(number.toString(16)); 
-  
-        // Pad with leading zeros
-        while (hexString.length() < 32) 
-        { 
-            hexString.insert(0, '0'); 
-        } 
-  
-        return hexString.toString(); 
+
+    public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
     }
-    //
-  
+
+    public ArrayList<Oferta> getOfertas() {
+        return this.ofertas;
+    }
+
+    public void setOfertas(ArrayList<Oferta> ofertas) {
+        this.ofertas = ofertas;
+    }  
+    
     public void saveFile(String nomFile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
-            pw.println(nombres+"|"+apellidos+"|"+organizacion+"|"+correo+"|"+toHexString(getSHA(clave)));
+            pw.println(this.ID+"|"+this.nombres+"|"+this.apellidos+"|"+this.organizacion+"|"+this.correo+"|"+Util.toHexString(Util.getSHA(this.clave)));
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -120,7 +122,7 @@ public class Vendedor {
             while (sc.hasNextLine()){
                 String linea = sc.next();
                 String [] arreglo = linea.split("\\|");
-                Vendedor v = new Vendedor(arreglo[0], arreglo[1],arreglo[2], arreglo[3], arreglo[4]);
+                Vendedor v = new Vendedor(Integer.parseInt(arreglo[0]), arreglo[1],arreglo[2], arreglo[3], arreglo[4],arreglo[5]);
                 vendedor.add(v);
             }
         }catch(Exception e){
@@ -129,14 +131,24 @@ public class Vendedor {
         return vendedor;
     }
     
-    @Override
-    public String toString() {
-        return  nombres + ", " + apellidos + ", "+ organizacion +", "+ correo+ ", " + clave ;
+    public static Vendedor searchByID(ArrayList<Vendedor> vendedores, int id)
+    {
+        for(Vendedor v : vendedores)
+        {
+            if(v.ID == id)
+                return v;
+        }
+        return null;
     }
     
-   
-    public static Vendedor registrarNuevoVendedor(Scanner sc)
+    @Override
+    public String toString() {
+        return this.ID + ", " + this.nombres + ", " + this.apellidos + ", "+ this.organizacion + ", " + this.correo+ ", " + this.clave ;
+    }
+    
+    public static Vendedor registrarNuevoVendedor(Scanner sc, ArrayList<Vendedor> vendedores, String nomfile)
      {
+        int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
         String nombres = sc.next();
         System.out.println("Ingrese los apellidos: ");
@@ -147,9 +159,25 @@ public class Vendedor {
         String correo = sc.next();
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
-        Vendedor nuevo = new Vendedor(nombres,apellidos,organizacion,correo,clave);
-        return nuevo;
+        Vendedor nuevo = new Vendedor(id,nombres,apellidos,organizacion,correo,clave);
+        if(vendedores.isEmpty()){
+            nuevo.saveFile(nomfile);
+            System.out.println("Vendedor registrado!");
+            return nuevo;
+        }
+        else{
+            for (int i=0;i<vendedores.size();i++){
+                if (!(vendedores.get(i).getCorreo().equals(correo))){
+                nuevo.saveFile(nomfile);
+                System.out.println("Vendedor registrado!");
+                return nuevo;
+                }
+                else{
+                    System.out.println("Correo repetido, no se puede registrar!");   
+                }
+            }   
+        }
+        return null;
     }
     
 }
-    

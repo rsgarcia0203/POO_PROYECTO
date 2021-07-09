@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -19,8 +20,8 @@ public class Automovil extends Vehiculo{
     private String vidrios;
     private String transmision;
     
-    public Automovil(String placa, String marca, String modelo, String tipo_motor, int anio, double recorrido, String color, String tipo_combustible, String vidrios, String transmision, double precio){
-        super(placa, marca, modelo, tipo_motor, anio, recorrido, color, tipo_combustible, precio);
+    public Automovil(int ID, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, String vidrios, String transmision, double precio){
+        super(ID, IDvendedor, placa, marca, modelo, tipo_motor, año, recorrido, color, tipo_combustible, precio);
         this.vidrios = vidrios;
         this.transmision = transmision;
     }
@@ -40,9 +41,9 @@ public class Automovil extends Vehiculo{
     public void setTransmision(String transmision) {
         this.transmision = transmision;
     }
-
     
-    public static Automovil nextAutomovil(Scanner sc){
+    public static Automovil nextAutomovil(Scanner sc, int IDvendedor, String nomfile){
+        int id = Util.nextID(nomfile);
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
         System.out.println("Ingrese la marca: ");
@@ -65,7 +66,7 @@ public class Automovil extends Vehiculo{
         String transmision =sc.next();
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
-        Automovil m=new Automovil(placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,precio);
+        Automovil m = new Automovil(id, IDvendedor, placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,precio);
         return m;
     }
     
@@ -74,7 +75,7 @@ public class Automovil extends Vehiculo{
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
-            pw.println(this.placa+"|"+this.marca+"|"+this.modelo+"|"+this.tipo_motor+"|"+this.anio+"|"+this.recorrido+"|"+this.color+"|"+this.tipo_combustible+"|"+this.vidrios+"|"+this.transmision+"|"+this.precio);
+            pw.println(this.ID+"|"+this.IDvendedor+"|"+this.placa+"|"+this.marca+"|"+this.modelo+"|"+this.tipo_motor+"|"+this.año+"|"+this.recorrido+"|"+this.color+"|"+this.tipo_combustible+"|"+this.vidrios+"|"+this.transmision+"|"+this.precio);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -89,7 +90,7 @@ public class Automovil extends Vehiculo{
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
                 Automovil e;
-                e = new Automovil(tokens[0],tokens[1],tokens[2],tokens[3],Integer.parseInt(tokens[4]),Double.parseDouble(tokens[5]),tokens[6],tokens[7],tokens[8],tokens[9],Double.parseDouble(tokens[10]));
+                e = new Automovil(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],tokens[3],tokens[4],tokens[5],Integer.parseInt(tokens[6]),Double.parseDouble(tokens[7]),tokens[8],tokens[9],tokens[10],tokens[11],Double.parseDouble(tokens[12]));
                 automovil.add(e);
             }
         }
@@ -100,8 +101,9 @@ public class Automovil extends Vehiculo{
     }
     @Override
     public String toString() {
-        return "Vehiculo{" + "placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.anio + ", recorrido=" + super.recorrido + 
-                ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision + ", precio=" + precio + '}';
+        return "Vehiculo{ ID: " + super.ID + ", IDvendedor: " + super.IDvendedor +", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 
+                ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision + ", precio=" + super.precio + '}';
     }
+
 }
 
