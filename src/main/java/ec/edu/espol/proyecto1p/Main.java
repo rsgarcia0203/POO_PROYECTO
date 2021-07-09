@@ -38,12 +38,6 @@ public class Main {
         int id;
         int opcion; //Guardaremos la opcion del usuario
         int subopcion;
-        ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
-        ArrayList<Comprador> compradores = Comprador.readFile("comprador.txt");
-        ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
-        ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
-        ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
-
 
         do{
             boolean sub_salir = false;
@@ -59,7 +53,11 @@ public class Main {
                 case 1:
                 {
                     do{
-                        System.out.println("==OPCIONES DEL VENDEDOR==");
+                        ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
+                        ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
+                        ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
+                        ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
+                        System.out.println("\n==OPCIONES DEL VENDEDOR==");
                         System.out.println("1. Registrar un nuevo vendedor");
                         System.out.println("2. Ingresar un nuevo vehiculo");
                         System.out.println("3. Aceptar oferta");
@@ -70,66 +68,47 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Vendedor v1 = Vendedor.registrarNuevoVendedor(sn,vendedores,"vendedor.txt");
+                                Vendedor.registrarNuevoVendedor(sn,vendedores,"vendedor.txt");
                                 break;    
                                 
                                     
                             case 2:
                                 System.out.println("\n=INGRESAR VEHICULO=");
                                 System.out.println("Ingrese correo: ");
-                                String correo = sn.nextLine();
+                                String correo = sn.next();
                                 System.out.println("Ingrese clave: ");
-                                String clave = sn.nextLine();
+                                String clave = sn.next();
                                 for (int i=0;i<vendedores.size();i++){
                                     String clave_i = vendedores.get(i).getClave();//clave del vendedor que estamos tomando
                                     String correo_i = vendedores.get(i).getCorreo();//correo del vendedor que estamos tomando
-                                    if (correo_i.equals(correo) && clave_i.equals(Util.toHexString(Util.getSHA(clave)))){
-                                        System.out.println("Bienvenido " + vendedores.get(i).getNombres() + " " + vendedores.get(i).getApellidos() + " de " + vendedores.get(i).getOrganizacion());
-                                        System.out.println("Ingrese tipo de vechiculo(auto/motocicleta/camioneta): ");  
-                                        String tipo = sn.nextLine();
-                                        id = vendedores.get(i).getID(); //obtenemos el ID del vendedor
-                                        if (tipo.equals("auto")){
-                                            Automovil au = Automovil.nextAutomovil(sn, id, "automovil.txt");
-                                            for (int j=0; j<automoviles.size();j++){
-                                                if (au.getPlaca().equals(automoviles.get(j).getPlaca())){
-                                                    System.out.println("Eror, placa existente en el sistema");
-                                                }
-                                                
-                                                au.saveFile("automovil.txt");
+                                    if (correo_i.equals(correo)){
+                                        if(clave_i.equals(Util.toHexString(Util.getSHA(clave)))){
+                                            System.out.println("\nBienvenido " + vendedores.get(i).getNombres() + " " + vendedores.get(i).getApellidos() + " de la organización " + vendedores.get(i).getOrganizacion());
+                                            System.out.println("Ingrese el tipo de vechiculo(auto/motocicleta/camioneta): ");  
+                                            String tipo = sn.next();
+                                            id = vendedores.get(i).getID(); //obtenemos el ID del vendedor
+                                            switch (tipo) {
+                                                case "auto":
+                                                    Automovil.nextAutomovil(sn, id, automoviles, "automovil.txt");
+                                                    break;
+                                                case "motocicleta":
+                                                    Motocicleta.nextMotocicleta(sn, id, motocicletas, "motocicleta.txt");
+                                                    break;
+                                                case "camioneta":
+                                                    Camioneta.nextCamioneta(sn, id, camionetas, "camioneta.txt");
+                                                    break;
+                                                default:
+                                                    System.out.println("Ingrese un tipo de vehiculo correcto.");
+                                                    break;
                                             }
-                                       
                                         }
-                                        
-                                        if (tipo.equals("motocicleta")){
-                                            Motocicleta mo = Motocicleta.nextMotocicleta(sn, id, "motocicleta.txt");
-                                            for (int j=0; j<motocicletas.size();j++){
-                                                if (mo.getPlaca().equals(motocicletas.get(j).getPlaca())){
-                                                    System.out.println("Error, placa existente en el sistema");
-                                                }
-                                                
-                                                mo.saveFile("motocicleta.txt");
-                                            }
-                                            
-                                        }
-                                        if (tipo.equals("camioneta")){
-                                            Camioneta ca = Camioneta.nextCamioneta(sn, id, "camioneta.txt");
-                                            for (int j=0; j<camionetas.size();j++){
-                                                if (ca.getPlaca().equals(camionetas.get(j).getPlaca())){
-                                                    System.out.println("Error, placa existente en el sistema");
-                                                }
-                                                
-                                                ca.saveFile("camioneta.txt");
-                                            }
-                                            
-                                            
-                                        }
-                                    
-                                    }
-                                    else 
-                                        System.out.println("Clave o correo incorrecto");
-                                      
-                                }
+                                        else 
+                                            System.out.println("Clave incorrecta");
+                                    }    
+                                }   
+                                System.out.println("Correo incorrecto");
                                 break;
+                            
                             case 3:
                                 System.out.println("\n=ACEPTAR OFERTA=");
                                 System.out.println("Ingrese correo: ");
@@ -150,9 +129,11 @@ public class Main {
                                     
                                 }
                                 break;
+                                
                             case 4:
                                 sub_salir = true;
                                 break;
+                            
                             default:
                                 System.out.println("El submenu solo tiene 4 opciones");
                         }
@@ -161,8 +142,12 @@ public class Main {
                 }
                     
                 case 2:
-                    while(!sub_salir){
-                        System.out.println("==OPCIONES DEL COMPRADOR==");
+                    do{
+                        ArrayList<Comprador> compradores = Comprador.readFile("comprador.txt");
+                        ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
+                        ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
+                        ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
+                        System.out.println("\n==OPCIONES DEL COMPRADOR==");
                         System.out.println("1. Registrar un nuevo comprador");
                         System.out.println("2. Ofertar por un vehículo");
                         System.out.println("3. Regresar");
@@ -172,26 +157,35 @@ public class Main {
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");
-                                Comprador c1 = Comprador.registrarNuevoComprador(sn,"comprador.txt");
-                                for (int i=0;i<compradores.size();i++){
-                                   if (!(compradores.get(i).getCorreo().equals(c1.getCorreo()))){
-                                        c1.saveFile("comprador.txt");
-                                        System.out.println("Comprador registrado!");
-                                   }
-                                   else{
-                                        System.out.println("Correo repetido, no se puede registrar!");                                       
-                                   }
-                                }
+                                Comprador.registrarNuevoComprador(sn, compradores, "comprador.txt");
                                 break;
+                            
                             case 2:
+                                System.out.println("\n=OFERTAR=");
+                                System.out.println("Ingrese el tipo de vehiculo: ");
+                                String tipo = sn.next();
+                                switch (tipo) {
+                                    case "automovil":
+                                        break;
+                                    case "camioneta":
+                                        break;
+                                    case "motocicleta":
+                                        break;
+                                    case "":
+                                        break;
+                                    default:
+                                        System.out.println("Tipo de vehículo no valido");
+                                        break;
+                                }  
                                 break;
+                                
                             case 3:
                                 sub_salir = true;
                                 break;
                             default:
                                 System.out.println("El submenu solo tiene 3 opciones");
                         }
-                    }
+                    }while(!sub_salir);
 
                     
                 case 3:

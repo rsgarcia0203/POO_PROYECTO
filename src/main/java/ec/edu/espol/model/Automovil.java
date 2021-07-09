@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -42,8 +43,9 @@ public class Automovil extends Vehiculo{
         this.transmision = transmision;
     }
     
-    public static Automovil nextAutomovil(Scanner sc, int IDvendedor, String nomfile){
+    public static void nextAutomovil(Scanner sc, int IDvendedor, ArrayList<Automovil> automoviles, String nomfile){
         int id = Util.nextID(nomfile);
+        sc.useLocale(Locale.US);
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
         System.out.println("Ingrese la marca: ");
@@ -66,8 +68,21 @@ public class Automovil extends Vehiculo{
         String transmision =sc.next();
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
-        Automovil m = new Automovil(id, IDvendedor, placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,precio);
-        return m;
+        Automovil au = new Automovil(id, IDvendedor, placa,marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,precio);
+        if (automoviles.isEmpty()){
+            au.saveFile("automovil.txt");
+            System.out.println("Automovil registrado.");
+            Vehiculo.saveFile("vehiculo.txt",1,id);
+        }
+        for (int j=0; j<automoviles.size();j++){
+            if(!(au.getPlaca().equals(automoviles.get(j).getPlaca()))){
+                System.out.println("Automovil registrado.");
+                au.saveFile("automovil.txt");
+                Vehiculo.saveFile("vehiculo.txt",1,id);
+            }
+            else
+                System.out.println("Eror, placa existente en el sistema");
+        }
     }
     
     
@@ -80,7 +95,7 @@ public class Automovil extends Vehiculo{
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-        }
+    }
     
     public static ArrayList<Automovil> readFile(String nomfile){
         ArrayList<Automovil> automovil = new ArrayList<>();

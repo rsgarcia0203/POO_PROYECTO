@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -52,7 +53,8 @@ public class Camioneta extends Vehiculo{
         this.traccion = traccion;
     }
     
-    public static Camioneta nextCamioneta(Scanner sc, int IDvendedor, String nomfile){
+    public static void nextCamioneta(Scanner sc, int IDvendedor, ArrayList<Camioneta> camionetas, String nomfile){
+        sc.useLocale(Locale.US);
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
@@ -78,9 +80,22 @@ public class Camioneta extends Vehiculo{
         String traccion =sc.next();
         System.out.println("Ingrese el precio: ");
         Double precio =sc.nextDouble();
-        Camioneta c = new Camioneta(id, IDvendedor, placa, marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
-        return c;
+        Camioneta ca = new Camioneta(id, IDvendedor, placa, marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
+        if (camionetas.isEmpty()){
+            ca.saveFile("camioneta.txt");
+            System.out.println("Camioneta registrada."); 
+            Vehiculo.saveFile("vehiculo.txt",3,id);
+        }
+        for (int j=0; j<camionetas.size();j++){
+            if (!(ca.getPlaca().equals(camionetas.get(j).getPlaca()))){
+                ca.saveFile("camioneta.txt");
+                Vehiculo.saveFile("vehiculo.txt",3,id);
+            }
+            else
+                System.out.println("Error, placa existente en el sistema");                                      
+        }
     }
+    
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
@@ -89,7 +104,8 @@ public class Camioneta extends Vehiculo{
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-        }
+    }
+    
     public static ArrayList<Camioneta> readFile(String nomfile){
         ArrayList<Camioneta> camioneta = new ArrayList<>();
         try(Scanner sc = new Scanner(new File(nomfile))){
@@ -108,6 +124,7 @@ public class Camioneta extends Vehiculo{
         }
         return camioneta;
     }
+    
     @Override
     public String toString() {
         return "Camioneta{ ID=" + super.ID + ", IDvendedor=" + super.IDvendedor + ", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 

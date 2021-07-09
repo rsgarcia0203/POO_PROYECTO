@@ -58,7 +58,7 @@ public class Util {
             contenedor.setFrom(new InternetAddress((String) properties.get("mail.smtp.user")));
             contenedor.addRecipient(Message.RecipientType.TO, new InternetAddress(correo));
             contenedor.setSubject("NOTIFICACION DEL SISTEMA - OFERTA ACEPTADA");
-            contenedor.setText(mensaje);
+            contenedor.setText(mensaje, "UTF-8");
             Transport t = session.getTransport("smtp");
             t.connect("smtp.gmail.com",(String) properties.get("mail.smtp.user"),(String) properties.get("mail.smtp.password"));
             t.sendMessage(contenedor, contenedor.getAllRecipients());

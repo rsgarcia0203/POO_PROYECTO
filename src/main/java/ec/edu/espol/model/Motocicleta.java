@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -22,7 +23,8 @@ public class Motocicleta extends Vehiculo{
         super(ID, IDvendedor, placa, marca, modelo, tipo_motor, año, recorrido, color, tipo_combustible, precio);
     }
      
-     public static Motocicleta nextMotocicleta(Scanner sc, int IDvendedor, String nomfile){
+     public static void nextMotocicleta(Scanner sc, int IDvendedor, ArrayList<Motocicleta> motocicletas, String nomfile){
+        sc.useLocale(Locale.US);
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
@@ -42,10 +44,21 @@ public class Motocicleta extends Vehiculo{
         String TipoCombustible =sc.next();
         System.out.println("Ingrese el precio: ");
         double precio =sc.nextDouble();
-        Motocicleta m = new Motocicleta(id, IDvendedor, placa, marca, modelo, tipodeMotor, anio, recorrido, color, TipoCombustible, precio);
-        return m;
-        
-    }
+        Motocicleta mo = new Motocicleta(id, IDvendedor, placa, marca, modelo, tipodeMotor, anio, recorrido, color, TipoCombustible, precio);
+        if (motocicletas.isEmpty()){
+            mo.saveFile("motocicleta.txt");
+            System.out.println("Motocicleta registrada."); 
+            Vehiculo.saveFile("vehiculo.txt",2,id);
+        }
+        for (int j=0; j<motocicletas.size();j++){
+            if (!(mo.getPlaca().equals(motocicletas.get(j).getPlaca()))){
+                mo.saveFile("motocicleta.txt");
+                Vehiculo.saveFile("vehiculo.txt",2,id);
+            }
+            else
+                System.out.println("Error, placa existente en el sistema");                                                    
+        }
+     }
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {

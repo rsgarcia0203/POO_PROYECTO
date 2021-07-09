@@ -124,7 +124,7 @@ public class Comprador {
         return  this.ID + ", " + this.nombres + ", " + this.apellidos + ", "+ this.organizacion +", "+ this.correo+ ", " + this.clave;
     }
     
-     public static Comprador registrarNuevoComprador(Scanner sc, String nomfile)
+     public static void registrarNuevoComprador(Scanner sc, ArrayList<Comprador> compradores, String nomfile)
      {
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
@@ -137,7 +137,24 @@ public class Comprador {
         String correo = sc.next();
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
-        Comprador nuevo = new Comprador(id,nombres,apellidos,organizacion,correo,clave);
-        return nuevo;
+        Comprador c = new Comprador(id,nombres,apellidos,organizacion,correo,clave);
+        if(compradores.isEmpty()){
+            c.saveFile("comprador.txt");
+            System.out.println("Comprador registrado!");
+
+        }
+        for (int i=0;i<compradores.size();i++){
+            if (!(compradores.get(i).getCorreo().equals(c.getCorreo()))){
+                c.saveFile("comprador.txt");
+                System.out.println("Comprador registrado!");
+            }
+            else{
+                System.out.println("Correo repetido, no se puede registrar!");                                       
+            }
+        }
     }
+     
+     public static void OfertarVehiculo(int año1, int año2, double recorrido1, double recorrido2, double precio1, double precio2){
+        
+     }
 }

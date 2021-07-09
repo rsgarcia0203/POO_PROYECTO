@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -150,4 +151,14 @@ public class Vehiculo {
         return null;
     }
     
+    public static void saveFile(String nomFile, int idtipo, int idclase){
+        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
+            int ID = Util.nextID(nomFile);
+            pw.println(ID+"|"+idtipo+"|"+idclase);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    } 
+      
 }

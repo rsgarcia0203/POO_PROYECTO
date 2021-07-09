@@ -120,9 +120,10 @@ public class Vendedor {
         ArrayList<Vendedor> vendedor = new ArrayList<>();
         try(Scanner sc = new Scanner(new File(nomFile))){
             while (sc.hasNextLine()){
-                String linea = sc.next();
+                String linea = sc.nextLine();
                 String [] arreglo = linea.split("\\|");
-                Vendedor v = new Vendedor(Integer.parseInt(arreglo[0]), arreglo[1],arreglo[2], arreglo[3], arreglo[4],arreglo[5]);
+                Vendedor v;
+                v = new Vendedor(Integer.parseInt(arreglo[0]), arreglo[1],arreglo[2], arreglo[3], arreglo[4],arreglo[5]);
                 vendedor.add(v);
             }
         }catch(Exception e){
@@ -146,7 +147,7 @@ public class Vendedor {
         return this.ID + ", " + this.nombres + ", " + this.apellidos + ", "+ this.organizacion + ", " + this.correo+ ", " + this.clave ;
     }
     
-    public static Vendedor registrarNuevoVendedor(Scanner sc, ArrayList<Vendedor> vendedores, String nomfile)
+    public static void registrarNuevoVendedor(Scanner sc, ArrayList<Vendedor> vendedores, String nomfile)
      {
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
@@ -163,21 +164,18 @@ public class Vendedor {
         if(vendedores.isEmpty()){
             nuevo.saveFile(nomfile);
             System.out.println("Vendedor registrado!");
-            return nuevo;
         }
         else{
             for (int i=0;i<vendedores.size();i++){
                 if (!(vendedores.get(i).getCorreo().equals(correo))){
                 nuevo.saveFile(nomfile);
                 System.out.println("Vendedor registrado!");
-                return nuevo;
                 }
                 else{
                     System.out.println("Correo repetido, no se puede registrar!");   
                 }
             }   
         }
-        return null;
     }
     
 }
