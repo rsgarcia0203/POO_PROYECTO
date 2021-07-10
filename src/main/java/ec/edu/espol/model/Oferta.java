@@ -65,7 +65,7 @@ public class Oferta {
     {
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
-            pw.println(this.ID+"|"+this.IDvendedor+"|"+this.IDvehiculo+"|"+this.correo);
+            pw.println(this.ID+"|"+this.IDvendedor+"|"+this.IDvehiculo+"|"+correo);
         }
         catch(Exception e)
         {

@@ -99,15 +99,36 @@ public class Util {
         return hexString.toString(); 
     }
     
-    public static void MenuPrincipal(Scanner sc){
+    public static int MenuPrincipal(Scanner sc){
+        System.out.println("===MENU DE OPCIONES===");
+        System.out.println("1. Vendedor");
+        System.out.println("2. Comprador");
+        System.out.println("3. Salir\n");         
+        System.out.println("Escribe una de las opciones: ");
+        int opcion = sc.nextInt();
+        return opcion;
         
     }
     
-    public static void MenuComprador(Scanner sc){
-        
+    public static int MenuComprador(Scanner sc){
+        System.out.println("\n==OPCIONES DEL COMPRADOR==");
+        System.out.println("1. Registrar un nuevo comprador");
+        System.out.println("2. Ofertar por un vehículo");
+        System.out.println("3. Regresar");                    
+        System.out.println("Escribe una de las opciones: ");
+        int subopcion = sc.nextInt();
+        return subopcion;
+
     }
     
-    public static void MenuVendedor(Scanner sc){
-        
+    public static int MenuVendedor(Scanner sc){
+        System.out.println("\n==OPCIONES DEL VENDEDOR==");
+        System.out.println("1. Registrar un nuevo vendedor");
+        System.out.println("2. Ingresar un nuevo vehiculo");
+        System.out.println("3. Aceptar oferta");
+        System.out.println("4. Regresar\n");                    
+        System.out.println("Escribe una de las opciones: ");
+        int subopcion = sc.nextInt();
+        return subopcion;
     }
 }

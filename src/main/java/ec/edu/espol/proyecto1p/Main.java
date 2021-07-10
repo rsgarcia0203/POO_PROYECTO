@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ec.edu.espol.proyecto1p;
 
 
@@ -33,7 +28,6 @@ public class Main {
      */
     
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        // TODO code application logic here                
         Scanner sn = new Scanner(System.in);
         int id;
         int opcion; //Guardaremos la opcion del usuario
@@ -41,13 +35,7 @@ public class Main {
 
         do{
             boolean sub_salir = false;
-            System.out.println("===MENU DE OPCIONES===");
-            System.out.println("1. Vendedor");
-            System.out.println("2. Comprador");
-            System.out.println("3. Salir\n");
-            
-            System.out.println("Escribe una de las opciones: ");
-            opcion = sn.nextInt();
+            opcion = Util.MenuPrincipal(sn);
             
             switch(opcion){
                 case 1:
@@ -57,64 +45,23 @@ public class Main {
                         ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
                         ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
                         ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
-                        System.out.println("\n==OPCIONES DEL VENDEDOR==");
-                        System.out.println("1. Registrar un nuevo vendedor");
-                        System.out.println("2. Ingresar un nuevo vehiculo");
-                        System.out.println("3. Aceptar oferta");
-                        System.out.println("4. Regresar\n");
-                    
-                        System.out.println("Escribe una de las opciones: ");
-                        subopcion = sn.nextInt();
+                        subopcion = Util.MenuVendedor(sn);
                         switch(subopcion){
                             case 1:
-                                System.out.println("\n=REGISTRAR=");
                                 Vendedor.registrarNuevoVendedor(sn,vendedores,"vendedor.txt");
                                 break;    
                                 
                                     
                             case 2:
-                                System.out.println("\n=INGRESAR VEHICULO=");
-                                System.out.println("Ingrese correo: ");
-                                String correo = sn.next();
-                                System.out.println("Ingrese clave: ");
-                                String clave = sn.next();
-                                for (int i=0;i<vendedores.size();i++){
-                                    String clave_i = vendedores.get(i).getClave();//clave del vendedor que estamos tomando
-                                    String correo_i = vendedores.get(i).getCorreo();//correo del vendedor que estamos tomando
-                                    if (correo_i.equals(correo)){
-                                        if(clave_i.equals(Util.toHexString(Util.getSHA(clave)))){
-                                            System.out.println("\nBienvenido " + vendedores.get(i).getNombres() + " " + vendedores.get(i).getApellidos() + " de la organización " + vendedores.get(i).getOrganizacion());
-                                            System.out.println("Ingrese el tipo de vechiculo(auto/motocicleta/camioneta): ");  
-                                            String tipo = sn.next();
-                                            id = vendedores.get(i).getID(); //obtenemos el ID del vendedor
-                                            switch (tipo) {
-                                                case "auto":
-                                                    Automovil.nextAutomovil(sn, id, automoviles, "automovil.txt");
-                                                    break;
-                                                case "motocicleta":
-                                                    Motocicleta.nextMotocicleta(sn, id, motocicletas, "motocicleta.txt");
-                                                    break;
-                                                case "camioneta":
-                                                    Camioneta.nextCamioneta(sn, id, camionetas, "camioneta.txt");
-                                                    break;
-                                                default:
-                                                    System.out.println("Ingrese un tipo de vehiculo correcto.");
-                                                    break;
-                                            }
-                                        }
-                                        else 
-                                            System.out.println("Clave incorrecta");
-                                    }    
-                                }   
-                                System.out.println("Correo incorrecto");
+                                Vendedor.registrarVehiculo(sn, vendedores, automoviles, camionetas, motocicletas);
                                 break;
                             
                             case 3:
                                 System.out.println("\n=ACEPTAR OFERTA=");
                                 System.out.println("Ingrese correo: ");
-                                correo = sn.next();
+                                String correo = sn.next();
                                 System.out.println("Ingrese clave: ");
-                                clave = sn.next();
+                                String clave = sn.next();
                                 for (int i=0;i<vendedores.size();i++){
                                     String clave_i = vendedores.get(i).getClave();//clave del vendedor que estamos tomando
                                     String correo_i = vendedores.get(i).getCorreo();//correo del vendedor que estamos tomando
@@ -147,13 +94,8 @@ public class Main {
                         ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
                         ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
                         ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
-                        System.out.println("\n==OPCIONES DEL COMPRADOR==");
-                        System.out.println("1. Registrar un nuevo comprador");
-                        System.out.println("2. Ofertar por un vehículo");
-                        System.out.println("3. Regresar");
-                    
-                        System.out.println("Escribe una de las opciones: ");
-                        subopcion = sn.nextInt();
+                        
+                        subopcion = Util.MenuComprador(sn);
                         switch(subopcion){
                             case 1:
                                 System.out.println("\n=REGISTRAR=");

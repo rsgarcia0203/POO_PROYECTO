@@ -149,6 +149,7 @@ public class Vendedor {
     
     public static void registrarNuevoVendedor(Scanner sc, ArrayList<Vendedor> vendedores, String nomfile)
      {
+        System.out.println("\n=REGISTRAR=");
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
         String nombres = sc.next();
@@ -176,6 +177,52 @@ public class Vendedor {
                 }
             }   
         }
+     }    
+     
+    public static void registrarVehiculo(Scanner sc, ArrayList<Vendedor> vendedores, ArrayList<Automovil> automoviles, ArrayList<Camioneta> camionetas, ArrayList<Motocicleta> motocicletas) throws NoSuchAlgorithmException{
+        System.out.println("\n=INGRESAR VEHICULO=");
+        System.out.println("Ingrese correo: ");
+        String correo = sc.next();
+        System.out.println("Ingrese clave: ");
+        String clave = sc.next();
+        boolean validarCorreo = false; 
+        for (int i=0;i<vendedores.size();i++)
+        {
+            String clave_i = vendedores.get(i).getClave();//clave del vendedor que estamos tomando
+            String correo_i = vendedores.get(i).getCorreo();//correo del vendedor que estamos tomando
+            
+            if (correo_i.equals(correo))
+            {
+                validarCorreo = true;
+                if(clave_i.equals(Util.toHexString(Util.getSHA(clave))))
+                {
+                    System.out.println("\nBienvenido " + vendedores.get(i).getNombres() + " " + vendedores.get(i).getApellidos() + " de la organización " + vendedores.get(i).getOrganizacion());
+                    System.out.println("Ingrese el tipo de vechiculo(auto/motocicleta/camioneta): ");  
+                    String tipo = sc.next();
+                    int id = vendedores.get(i).getID(); //obtenemos el ID del vendedor
+                    switch (tipo)
+                    {
+                        case "auto":
+                            Automovil.nextAutomovil(sc, id, automoviles, "automovil.txt");
+                            break;
+                        case "motocicleta":
+                            Motocicleta.nextMotocicleta(sc, id, motocicletas, "motocicleta.txt");
+                            break;
+                        case "camioneta":
+                            Camioneta.nextCamioneta(sc, id, camionetas, "camioneta.txt");
+                            break;
+                        default:
+                            System.out.println("Ingrese un tipo de vehiculo correcto.");
+                            break;
+                    }
+                }
+                else 
+                    System.out.println("Clave incorrecta");
+            }    
+        }
+        if(validarCorreo == false)
+            System.out.println("Correo incorrecto");
     }
+    
     
 }
