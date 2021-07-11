@@ -106,7 +106,7 @@ public class Ingreso {
     }
     
     public static void nextIngreso(Vehiculo vehiculo, String nomfile){
-        int ID = Util.nextID("ingreso.txt");
+        int ID = Util.nextID(nomfile);
         int idvehiculo = vehiculo.getIDvehiculo();
         int idvendedor = vehiculo.getIDvendedor();
         if(vehiculo instanceof Automovil)
@@ -155,8 +155,7 @@ public class Ingreso {
                     i.setVendedor(v);
                     i.setVehiculo(ca);
                     break; 
-            }
-                        
+            }                      
         }
     }
     

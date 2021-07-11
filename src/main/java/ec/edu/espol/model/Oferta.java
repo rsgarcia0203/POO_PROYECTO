@@ -104,10 +104,10 @@ public class Oferta {
         return  this.ID + ", " + this.IDvendedor + ", " + this.IDvehiculo + ", " + this.IDtipo + ", " + this.correo;
     }
     
-    public static Oferta registrarNuevaOferta(Vendedor vendedor, Vehiculo vehiculo, Comprador comprador, String nomfile)
+    public static Oferta registrarNuevaOferta(Vehiculo vehiculo, Comprador comprador, String nomfile)
      {
         int id = Util.nextID(nomfile);
-        int IDvendedor = vendedor.getID();
+        int IDvendedor = vehiculo.getIDvendedor();
         int IDvehiculo = vehiculo.getIDvehiculo();
         int IDtipo = 0;
         if (vehiculo instanceof Automovil)

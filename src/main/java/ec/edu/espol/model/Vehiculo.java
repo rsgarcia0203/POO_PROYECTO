@@ -29,6 +29,7 @@ public class Vehiculo {
     protected String tipo_combustible;
     protected double precio;
     protected Vendedor vendedor;
+    protected ArrayList<Oferta> ofertas;
     
     public Vehiculo(int IDvehiculo, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, double precio){
         this.IDvendedor = IDvendedor;
@@ -43,6 +44,7 @@ public class Vehiculo {
         this.tipo_combustible = tipo_combustible;
         this.precio = precio;
         this.vendedor = null;
+        this.ofertas = new ArrayList<>();
     }
 
     public int getIDvehiculo() {
@@ -140,5 +142,13 @@ public class Vehiculo {
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }    
-          
+
+    public ArrayList<Oferta> getOfertas() {
+        return this.ofertas;
+    }
+
+    public void setOfertas(ArrayList<Oferta> ofertas) {
+        this.ofertas = ofertas;
+    }
+       
 }

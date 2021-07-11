@@ -28,7 +28,6 @@ public class Vendedor {
     String correo;
     String clave;
     ArrayList<Vehiculo> vehiculos;
-    ArrayList<Oferta> ofertas;
 
     public Vendedor(int ID, String nombres, String apellidos, String organizacion, String correo, String clave) {
         this.ID = ID;
@@ -38,7 +37,6 @@ public class Vendedor {
         this.correo = correo;
         this.clave = clave;
         this.vehiculos = new ArrayList<>();
-        this.ofertas = new ArrayList<>();
     }
     
     public int getID() {
@@ -96,14 +94,6 @@ public class Vendedor {
     public void setVehiculos(ArrayList<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }
-
-    public ArrayList<Oferta> getOfertas() {
-        return this.ofertas;
-    }
-
-    public void setOfertas(ArrayList<Oferta> ofertas) {
-        this.ofertas = ofertas;
-    }  
     
     public void saveFile(String nomFile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
