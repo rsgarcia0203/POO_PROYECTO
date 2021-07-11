@@ -108,7 +108,7 @@ public class Motocicleta extends Vehiculo{
     }
     @Override
     public String toString() {
-        return "Motocicleta{ ID=" + this.ID +", IDvehiculo= " + super.IDvehiculo + ", IDvendedor=" + + super.IDvendedor +  ", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 
+        return "Vehiculo{ ID=" + this.ID +", IDvehiculo= " + super.IDvehiculo + ", IDvendedor=" + + super.IDvendedor +  ", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 
                 ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible + ", precio=" + precio + '}';
     }
 }

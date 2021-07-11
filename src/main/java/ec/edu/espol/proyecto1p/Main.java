@@ -4,9 +4,11 @@ package ec.edu.espol.proyecto1p;
 import ec.edu.espol.model.Automovil;
 import ec.edu.espol.model.Camioneta;
 import ec.edu.espol.model.Comprador;
+import ec.edu.espol.model.Ingreso;
 import java.io.IOException;
 import java.util.Scanner;
 import ec.edu.espol.model.Motocicleta;
+import ec.edu.espol.model.Oferta;
 import ec.edu.espol.model.Vendedor;
 import ec.edu.espol.util.Util;
 import java.security.InvalidParameterException;
@@ -45,6 +47,8 @@ public class Main {
                         ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
                         ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
                         ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
+                        ArrayList<Ingreso> ingresos = Ingreso.readFile("ingreso.txt");
+                        Ingreso.link(vendedores, automoviles, camionetas, motocicletas, ingresos);
                         subopcion = Util.MenuVendedor(sn);
                         switch(subopcion){
                             case 1:
@@ -94,31 +98,17 @@ public class Main {
                         ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
                         ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
                         ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
-                        
+                        ArrayList<Oferta> ofertas = Oferta.readFile("oferta.txt");
+                        Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
                         subopcion = Util.MenuComprador(sn);
                         switch(subopcion){
                             case 1:
-                                System.out.println("\n=REGISTRAR=");
                                 Comprador.registrarNuevoComprador(sn, compradores, "comprador.txt");
                                 break;
                             
                             case 2:
-                                System.out.println("\n=OFERTAR=");
-                                System.out.println("Ingrese el tipo de vehiculo: ");
-                                String tipo = sn.next();
-                                switch (tipo) {
-                                    case "automovil":
-                                        break;
-                                    case "camioneta":
-                                        break;
-                                    case "motocicleta":
-                                        break;
-                                    case "":
-                                        break;
-                                    default:
-                                        System.out.println("Tipo de vehículo no valido");
-                                        break;
-                                }  
+                                
+                                 
                                 break;
                                 
                             case 3:

@@ -150,5 +150,5 @@ public class Vehiculo {
     public void setOfertas(ArrayList<Oferta> ofertas) {
         this.ofertas = ofertas;
     }
-       
+
 }

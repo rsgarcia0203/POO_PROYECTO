@@ -126,6 +126,7 @@ public class Comprador {
     
      public static void registrarNuevoComprador(Scanner sc, ArrayList<Comprador> compradores, String nomfile)
      {
+        System.out.println("\n=REGISTRAR=");
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese los nombres: ");
         String nombres = sc.next();
@@ -154,7 +155,59 @@ public class Comprador {
         }
     }
      
-     public static void OfertarVehiculo(){
-        
-     }
+     public static void OfertarVehiculo(Scanner sc, ArrayList<Ingreso> ingresos)
+     {
+        System.out.println("\n=OFERTAR=");
+        System.out.println("Ingrese el tipo de vehiculo: (si desea revisar todos los tipos, no ingrese nada)");
+        String tipo = sc.next();
+        if(tipo.equals("automovil") || tipo.equals("motocicleta") || tipo.equals("camioneta") || tipo.equals(""))
+        {
+            System.out.println("Ingrese el rango del recorrido: (si desea revisar por todos los recorridos, ingrese 0 en ambas opciones)");
+            System.out.println("Desde: ");
+            double recorridoInicial = sc.nextDouble();
+            System.out.println("Hasta: ");
+            double recorridoFinal = sc.nextDouble();
+            if(recorridoInicial != 0 && recorridoFinal != 0)
+            {
+                System.out.println("Ingrese el rango del año: (si desea revisar por todos los años, ingrese 0 en ambas opciones)");
+                System.out.println("Desde: ");
+                int añoInicial = sc.nextInt();
+                System.out.println("Hasta: ");
+                int añoFinal = sc.nextInt();
+                if(añoInicial != 0 && añoFinal != 0)
+                {
+                    System.out.println("Ingrese el rango del precio:");
+                    System.out.println("Desde: ");
+                    double precioInicial = sc.nextDouble();
+                    System.out.println("Hasta: ");
+                    double precioFinal = sc.nextDouble();
+                    if(precioInicial != 0 && precioFinal != 0)
+                    {
+                        switch (tipo) 
+                        {
+                            case "automovil":
+                                for(Ingreso i: ingresos)
+                                {
+                                    
+                                }               
+                                break;
+                
+                            case "camioneta":
+                                break;
+                
+                            case "motocicleta":
+                                break;
+                
+                            default:
+                
+                        }
+                    }
+                }
+            }
+            
+            
+        }    
+        else
+             System.out.println("Tipo de vehiculo no valido");           
+    }
 }
