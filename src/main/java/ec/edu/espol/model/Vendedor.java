@@ -11,9 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
@@ -207,7 +204,7 @@ public class Vendedor {
         }
     }
 
-    public static void aceptarOferta(Scanner sc, ArrayList<Vendedor> vendedores, ArrayList<Oferta> ofertas) throws NoSuchAlgorithmException, IOException {
+    public static void aceptarOferta(Scanner sc, ArrayList<Vendedor> vendedores, ArrayList<Oferta> ofertas, ArrayList<Ingreso> ingresos, ArrayList<Vehiculo> vehiculos) throws NoSuchAlgorithmException, IOException {
         System.out.println("\n=OFERTAS=");
         System.out.println("Ingrese correo: ");
         String correo = sc.next();
@@ -244,6 +241,9 @@ public class Vendedor {
                                             "Le informamos a Ud. que su oferta por el vehiculo de placas "+v.getPlaca()+" ha sido aceptada, por favor ponerse en contacto con el dueño del vehiculo antes singularizado."
                                             + "<em> SYSTEM-POO-G2 </em>" ;
                                     Util.enviarEmail(ofs.get(e).getComprador().getCorreo(), mensaje);
+                                    Ingreso.eliminarIngreso(ingresos, vehiculos,v);
+                                    Oferta.eliminarOferta(ofertas, v);
+                                    Vehiculo.eliminarVehiculo(vehiculos, v);
                                     
                                 }
 

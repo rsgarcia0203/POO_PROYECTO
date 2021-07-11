@@ -89,7 +89,7 @@ public class Oferta {
         this.comprador = comprador;
     }
     
-    public void saveFile(String nomfile, String correo)
+    public void saveFile(String nomfile)
     {
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
@@ -164,6 +164,21 @@ public class Oferta {
                     o.setVehiculo(ca);
                     break; 
             }                      
+        }
+    }
+    
+    public static void eliminarOferta(ArrayList<Oferta> ofertas,Vehiculo vehiculo)
+    {
+        for(int i = 0; i < ofertas.size(); i++)
+        {
+            if (ofertas.get(i).getVehiculo().equals(vehiculo))
+            {
+                ofertas.remove(i);
+            }
+        }
+        for(Oferta o: ofertas)
+        {
+            o.saveFile("ingreso.txt");
         }
     }
 }

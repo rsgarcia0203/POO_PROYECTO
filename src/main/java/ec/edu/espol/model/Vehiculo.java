@@ -5,12 +5,8 @@
  */
 package ec.edu.espol.model;
 
-import ec.edu.espol.util.Util;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Objects;
 
 /**
  *
@@ -150,7 +146,28 @@ public class Vehiculo {
     public void setOfertas(ArrayList<Oferta> ofertas) {
         this.ofertas = ofertas;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Vehiculo other = (Vehiculo) obj;
+        return Objects.equals(this.placa, other.placa);
+    }
+        
     public static ArrayList<Vehiculo> vehiculosxRecorrido(ArrayList<Vehiculo> vehiculos, double recorridoInicio, double recorridoFinal)
     {
         ArrayList<Vehiculo> xRecorrido = new ArrayList <>();
@@ -188,5 +205,26 @@ public class Vehiculo {
             }
         }
         return xPrecio;
-    } 
+    }
+    
+    public static void eliminarVehiculo(ArrayList<Vehiculo> vehiculos, Vehiculo vehiculo)
+    {
+        for(int i = 0; i < vehiculos.size(); i++)
+        {
+            if (vehiculos.get(i).equals(vehiculo))
+            {
+                vehiculos.remove(i);
+            }
+        }
+        
+        for(Vehiculo v: vehiculos)
+        {
+            if(vehiculo instanceof Automovil)
+                ((Automovil) vehiculo).saveFile("automovil.txt");
+            if(vehiculo instanceof Motocicleta)
+                ((Motocicleta) vehiculo).saveFile("motocicleta");
+            if(vehiculo instanceof Camioneta)
+                ((Camioneta) vehiculo).saveFile("camioneta");
+        }
+    }
 }

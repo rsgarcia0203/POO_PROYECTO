@@ -162,4 +162,19 @@ public class Ingreso {
         }
     }
     
+    public static void eliminarIngreso(ArrayList<Ingreso> ingresos,ArrayList<Vehiculo> vehiculos, Vehiculo vehiculo)
+    {
+        for(int i = 0; i < ingresos.size(); i++)
+        {
+            if (ingresos.get(i).getVehiculo().equals(vehiculo))
+            {
+                ingresos.remove(i);
+            }
+        }
+        
+        for(Ingreso i: ingresos)
+        {
+            i.saveFile("ingreso.txt");
+        }
+    }
 }

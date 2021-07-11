@@ -12,10 +12,8 @@ import ec.edu.espol.model.Oferta;
 import ec.edu.espol.model.Vehiculo;
 import ec.edu.espol.model.Vendedor;
 import ec.edu.espol.util.Util;
-import java.security.InvalidParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import javax.mail.MessagingException;
 
 /**
  *
@@ -65,14 +63,13 @@ public class Main {
                             case 1:
                                 Vendedor.registrarNuevoVendedor(sn,vendedores,"vendedor.txt");
                                 break;    
-                                
-                                    
+                                             
                             case 2:
                                 Vendedor.registrarVehiculo(sn, vendedores, automoviles, camionetas, motocicletas);
                                 break;
                             
                             case 3:
-                                Vendedor.aceptarOferta(sn, vendedores, ofertas);
+                                Vendedor.aceptarOferta(sn, vendedores, ofertas, ingresos, vehiculos);
                                 break;
                                 
                             case 4:
