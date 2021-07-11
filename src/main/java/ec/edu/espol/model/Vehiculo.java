@@ -5,6 +5,10 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -39,7 +43,6 @@ public class Vehiculo {
         this.color = color;
         this.tipo_combustible = tipo_combustible;
         this.precio = precio;
-        this.vendedor = null;
         this.ofertas = new ArrayList<>();
     }
 
@@ -207,7 +210,7 @@ public class Vehiculo {
         return xPrecio;
     }
     
-    public static void eliminarVehiculo(ArrayList<Vehiculo> vehiculos, Vehiculo vehiculo)
+    public static void eliminarVehiculo(ArrayList<Vehiculo> vehiculos, Vehiculo vehiculo) throws IOException
     {
         for(int i = 0; i < vehiculos.size(); i++)
         {
@@ -216,15 +219,17 @@ public class Vehiculo {
                 vehiculos.remove(i);
             }
         }
-        
+        Util.limpiarArchivo("automovil.txt");
+        Util.limpiarArchivo("motocicleta.txt");
+        Util.limpiarArchivo("camioneta.txt");
         for(Vehiculo v: vehiculos)
         {
             if(vehiculo instanceof Automovil)
                 ((Automovil) vehiculo).saveFile("automovil.txt");
             if(vehiculo instanceof Motocicleta)
-                ((Motocicleta) vehiculo).saveFile("motocicleta");
+                ((Motocicleta) vehiculo).saveFile("motocicleta.txt");
             if(vehiculo instanceof Camioneta)
-                ((Camioneta) vehiculo).saveFile("camioneta");
+                ((Camioneta) vehiculo).saveFile("camioneta.txt");
         }
     }
 }

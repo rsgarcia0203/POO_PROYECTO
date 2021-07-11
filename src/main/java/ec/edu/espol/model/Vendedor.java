@@ -28,6 +28,9 @@ public class Vendedor {
     String clave;
     ArrayList<Vehiculo> vehiculos;
 
+    public Vendedor() {
+    }
+
     public Vendedor(int ID, String nombres, String apellidos, String organizacion, String correo, String clave) {
         this.ID = ID;
         this.nombres = nombres;
@@ -109,8 +112,7 @@ public class Vendedor {
             while (sc.hasNextLine()) {
                 String linea = sc.nextLine();
                 String[] arreglo = linea.split("\\|");
-                Vendedor v;
-                v = new Vendedor(Integer.parseInt(arreglo[0]), arreglo[1], arreglo[2], arreglo[3], arreglo[4], arreglo[5]);
+                Vendedor v = new Vendedor(Integer.parseInt(arreglo[0]), arreglo[1], arreglo[2], arreglo[3], arreglo[4], arreglo[5]);
                 vendedor.add(v);
             }
         } catch (Exception e) {
@@ -130,7 +132,7 @@ public class Vendedor {
 
     @Override
     public String toString() {
-        return this.ID + ", " + this.nombres + ", " + this.apellidos + ", " + this.organizacion + ", " + this.correo + ", " + this.clave;
+        return "Vendedor<"+this.ID+">{Nombres=" + this.nombres + ", Apellidos=" + this.apellidos + ", Organizacion=" + this.organizacion + ", Correo=" + this.correo + ", Clave=" + this.clave + "}";
     }
 
     public static void registrarNuevoVendedor(Scanner sc, ArrayList<Vendedor> vendedores, String nomfile) {
@@ -221,34 +223,45 @@ public class Vendedor {
                     System.out.println("\nBienvenido " + vendedores.get(i).getNombres() + " " + vendedores.get(i).getApellidos() + " de la organización " + vendedores.get(i).getOrganizacion());
                     System.out.println("Ingrese una placa: ");
                     String placa = sc.next();
+                    boolean validarPlaca = false;
                     for (Vehiculo v : vendedores.get(i).getVehiculos()) //recorremos los vehiculos que ha registrado ese vendedor
                     {
-                        if (v.getPlaca().equals(placa)) {
-                            System.out.println(v.getMarca() + " " + v.getModelo() + "Precio: " + v.getPrecio());
-                            System.out.println("Se han realizado " + v.getOfertas().size() + " ofertas");
-                            ArrayList<Oferta> ofs = v.getOfertas();
-                            for (int e = 0; e < ofs.size(); e++) {
-                                System.out.println("Oferta" + (e + 1));
-                                System.out.println(" Correo: " + ofs.get(e).getComprador().getCorreo());
-                                System.out.println("Precio Ofertado" + ofs.get(e).getPrecioOfertado());
-                                String op = Util.aceptarOfertas(sc, e, ofs.size()-1);
-                                if (op.equals("anterior")) {
-                                    e -= 2;
-                                } 
-                                else if (op.equals("aceptar")) {
-                                    System.out.println("Oferta aceptada, se enviara un mensaje al correo del ofertante.");
-                                    String mensaje = "<b>Estimado : " + ofs.get(e).getComprador().getNombres().toUpperCase() + ofs.get(e).getComprador().getApellidos().toUpperCase()+"</b>"+
-                                            "Le informamos a Ud. que su oferta por el vehiculo de placas "+v.getPlaca()+" ha sido aceptada, por favor ponerse en contacto con el dueño del vehiculo antes singularizado."
-                                            + "<em> SYSTEM-POO-G2 </em>" ;
-                                    Util.enviarEmail(ofs.get(e).getComprador().getCorreo(), mensaje);
-                                    Ingreso.eliminarIngreso(ingresos, vehiculos,v);
-                                    Oferta.eliminarOferta(ofertas, v);
-                                    Vehiculo.eliminarVehiculo(vehiculos, v);
-                                    
-                                }
+                        if (v.getPlaca().equals(placa)) //verificamos que la palca sea correcta
+                        {
+                            validarPlaca = true;   
+                            if (v.getOfertas().isEmpty()) //verificamos que ese vehiculo tenga ofertas
+                                System.out.println("No se han realizado ofertas para este vehiculo.");   
+                            else {
+                                System.out.println("\nVehiculo{ Marca:" + v.getMarca() + ", Modelo:" + v.getModelo() + ", Precio: " + v.getPrecio() + "}");
+                                System.out.println("Se han realizado " + v.getOfertas().size() + " ofertas");
+                                ArrayList<Oferta> ofs = v.getOfertas();
+                                for (int e = 0; e < ofs.size(); e++) 
+                                {
+                                    System.out.println("\n-Oferta <" + (e + 1) + ">-");
+                                    System.out.println("Correo: " + ofs.get(e).getComprador().getCorreo());
+                                    System.out.println("Precio Ofertado: $" + ofs.get(e).getPrecioOfertado() + "\n");
+                                    String op = Util.aceptarOfertas(sc, e, ofs.size() - 1);
+                                    if (op.equals("anterior")) 
+                                    {
+                                        e -= 2;
+                                    } else if (op.equals("aceptar")) {
+                                        System.out.println("Oferta aceptada, se enviara un mensaje al correo del ofertante.");
+                                        String mensaje = "<H1><b>Estimado: " + ofs.get(e).getComprador().getNombres().toUpperCase() + " " + ofs.get(e).getComprador().getApellidos().toUpperCase() + "</b></H1></br></br>"
+                                                + "<H2>Le informamos a Ud. que su oferta por el vehiculo de placas " + v.getPlaca() + " ha sido aceptada, por favor ponerse en contacto con el dueño del vehiculo antes singularizado.</H2></br></br></br>"
+                                                + "<H2><em> SYSTEM-POO-G2 </em></H2>";
+                                        Util.enviarEmail(ofs.get(e).getComprador().getCorreo(), mensaje);
+                                        Ingreso.eliminarIngreso(ingresos, v);
+                                        Oferta.eliminarOferta(ofertas, v);
+                                        Vehiculo.eliminarVehiculo(vehiculos, v);
 
+                                    }
+
+                                }
                             }
                         }
+                    }
+                    if (validarPlaca == false) {
+                        System.out.println("Placa erronea.");
                     }
                 } else {
                     System.out.println("Clave incorrecta");

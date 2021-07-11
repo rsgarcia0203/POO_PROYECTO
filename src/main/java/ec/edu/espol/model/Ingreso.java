@@ -8,6 +8,7 @@ package ec.edu.espol.model;
 import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -111,17 +112,17 @@ public class Ingreso {
         int idvendedor = vehiculo.getIDvendedor();
         if(vehiculo instanceof Automovil)
         {
-            Ingreso i = new Ingreso(ID,idvehiculo,idvendedor,1);
+            Ingreso i = new Ingreso(ID,idvendedor,idvehiculo,1);
             i.saveFile(nomfile);
         }
         else if(vehiculo instanceof Motocicleta)
         {
-            Ingreso i = new Ingreso(ID,idvehiculo,idvendedor,2);
+            Ingreso i = new Ingreso(ID,idvendedor,idvehiculo,2);
             i.saveFile(nomfile);
         }
         else if(vehiculo instanceof Camioneta)
         {
-            Ingreso i = new Ingreso(ID,idvehiculo,idvendedor,3);
+            Ingreso i = new Ingreso(ID,idvendedor,idvehiculo,3);
             i.saveFile(nomfile);
         }    
         
@@ -149,7 +150,7 @@ public class Ingreso {
                     i.setVehiculo(mo);
                     vehiculos.add(mo);
                     break; 
-                    
+     
                 case 3:
                     Camioneta ca = Camioneta.searchByID(camionetas, i.getIdVehiculo());
                     v.getVehiculos().add(ca);
@@ -162,7 +163,7 @@ public class Ingreso {
         }
     }
     
-    public static void eliminarIngreso(ArrayList<Ingreso> ingresos,ArrayList<Vehiculo> vehiculos, Vehiculo vehiculo)
+    public static void eliminarIngreso(ArrayList<Ingreso> ingresos, Vehiculo vehiculo) throws IOException
     {
         for(int i = 0; i < ingresos.size(); i++)
         {
@@ -170,11 +171,18 @@ public class Ingreso {
             {
                 ingresos.remove(i);
             }
-        }
-        
+        }    
+        Util.limpiarArchivo("ingreso.txt");
         for(Ingreso i: ingresos)
         {
             i.saveFile("ingreso.txt");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Ingreso<" + this.ID + ">{idVendedor=" + this.idVendedor + ", idVehiculo=" + this.idVehiculo + ", idTipo=" + this.idTipo + ", vendedor=" + this.vendedor + ", vehiculo=" + this.vehiculo + '}';
+    }
+    
+    
 }

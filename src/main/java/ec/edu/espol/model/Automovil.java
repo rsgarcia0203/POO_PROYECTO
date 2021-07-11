@@ -102,7 +102,7 @@ public class Automovil extends Vehiculo{
                 Ingreso.nextIngreso(au,"ingreso.txt");
             }
             else
-                System.out.println("Eror, placa existente en el sistema");
+                System.out.println("Error, placa existente en el sistema");
         }
     }
     
@@ -137,7 +137,7 @@ public class Automovil extends Vehiculo{
     }
     @Override
     public String toString() {
-        return "Vehiculo{ ID= " + this.ID + ", IDvehiculo=" + super.IDvehiculo + ", IDvendedor= " + super.IDvendedor +", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 
+        return "Automovil<" + this.ID + ">{placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 
                 ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision + ", precio=" + super.precio + '}';
     }
 

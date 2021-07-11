@@ -8,6 +8,7 @@ package ec.edu.espol.model;
 import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -106,7 +107,7 @@ public class Oferta {
         ArrayList<Oferta> oferta = new ArrayList<>();
         try(Scanner sc = new Scanner(new File(nomFile))){
             while (sc.hasNextLine()){
-                String linea = sc.next();
+                String linea = sc.nextLine();
                 String [] arreglo = linea.split("\\|");
                 Oferta o = new Oferta(Integer.parseInt(arreglo[0]), Integer.parseInt(arreglo[1]), Integer.parseInt(arreglo[2]), Integer.parseInt(arreglo[3]), Double.parseDouble(arreglo[4]));
                 oferta.add(o);
@@ -116,14 +117,14 @@ public class Oferta {
         }
         return oferta;
     }
-    
+
     @Override
     public String toString() {
-        return  this.ID + ", " + this.IDvehiculo + ", " + this.IDtipo + ", " + this.IDcomprador;
+        return "Oferta<" + this.ID + ">{IDvehiculo=" + this.IDvehiculo + ", IDtipo=" + this.IDtipo + ", IDcomprador=" + this.IDcomprador + ", precioOfertado=" + this.precioOfertado + ", vehiculo=" + this.vehiculo + ", comprador=" + this.comprador + '}';
     }
     
-    public static Oferta registrarNuevaOferta(Vehiculo vehiculo, Comprador comprador, double precioOfertado, String nomfile)
-     {
+    public static void registrarNuevaOferta(Vehiculo vehiculo, Comprador comprador, double precioOfertado, String nomfile)
+    {
         int id = Util.nextID(nomfile);
         int IDvehiculo = vehiculo.getIDvehiculo();
         int IDtipo = 0;
@@ -135,7 +136,8 @@ public class Oferta {
         else if (vehiculo instanceof Camioneta)
             IDtipo = 3; 
         Oferta nuevo = new Oferta(id,IDvehiculo, IDtipo, IDcomprador, precioOfertado);
-        return nuevo;
+        nuevo.saveFile(nomfile);
+        System.out.println("Oferta registrada con exito.");
     }
     
     public static void link(ArrayList<Comprador> compradores, ArrayList<Automovil> automoviles, ArrayList<Camioneta> camionetas, ArrayList<Motocicleta> motocicletas, ArrayList<Oferta> ofertas){
@@ -167,7 +169,7 @@ public class Oferta {
         }
     }
     
-    public static void eliminarOferta(ArrayList<Oferta> ofertas,Vehiculo vehiculo)
+    public static void eliminarOferta(ArrayList<Oferta> ofertas,Vehiculo vehiculo) throws IOException
     {
         for(int i = 0; i < ofertas.size(); i++)
         {
@@ -176,9 +178,10 @@ public class Oferta {
                 ofertas.remove(i);
             }
         }
+        Util.limpiarArchivo("oferta.txt");
         for(Oferta o: ofertas)
         {
-            o.saveFile("ingreso.txt");
+            o.saveFile("oferta.txt");
         }
-    }
+    }      
 }

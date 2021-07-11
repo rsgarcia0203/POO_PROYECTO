@@ -41,9 +41,13 @@ public class Main {
         ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt"); 
         ArrayList<Ingreso> ingresos = Ingreso.readFile("ingreso.txt");
         ArrayList<Oferta> ofertas = Oferta.readFile("oferta.txt");
-        Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos);
         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
-
+        Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos); 
+        for (Vendedor v: vendedores){
+            for(Vehiculo vh: v.getVehiculos())
+                System.out.println(vh.getOfertas());
+        }
+             
         do{
             boolean sub_salir = false;
             opcion = Util.MenuPrincipal(sn);
@@ -57,6 +61,7 @@ public class Main {
                         camionetas = Camioneta.readFile("camioneta.txt");
                         motocicletas = Motocicleta.readFile("motocicleta.txt"); 
                         ingresos = Ingreso.readFile("ingreso.txt");
+                        Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
                         Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos);
                         subopcion = Util.MenuVendedor(sn);
                         switch(subopcion){
@@ -93,6 +98,7 @@ public class Main {
                         motocicletas = Motocicleta.readFile("motocicleta.txt");
                         ofertas = Oferta.readFile("oferta.txt");
                         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
+                        Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos); 
                         subopcion = Util.MenuComprador(sn);
                         switch(subopcion){
                             case 1:
