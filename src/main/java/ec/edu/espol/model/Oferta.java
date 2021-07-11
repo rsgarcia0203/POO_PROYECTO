@@ -21,14 +21,16 @@ public class Oferta {
     private int IDvehiculo;
     private int IDtipo; //guardaremos el ID del tipo dependiendo del tipo
     private int IDcomprador;
+    private double precioOfertado;
     private Vehiculo vehiculo;
     private Comprador comprador;
     
-    public Oferta(int ID, int IDvehiculo, int IDtipo, int IDcomprador){
+    public Oferta(int ID, int IDvehiculo, int IDtipo, int IDcomprador, double precioOfertado){
         this.ID = ID;
         this.IDvehiculo = IDvehiculo;
         this.IDtipo = IDtipo;
         this.IDcomprador = IDcomprador;
+        this.precioOfertado = precioOfertado;
     }
 
     public int getID() {
@@ -62,6 +64,14 @@ public class Oferta {
     public void setIDcomprador(int IDcomprador) {
         this.IDcomprador = IDcomprador;
     }
+
+    public double getPrecioOfertado() {
+        return precioOfertado;
+    }
+
+    public void setPrecioOfertado(double precioOfertado) {
+        this.precioOfertado = precioOfertado;
+    }
     
     public Vehiculo getVehiculo() {
         return vehiculo;
@@ -83,7 +93,7 @@ public class Oferta {
     {
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
-            pw.println(this.ID+"|"+this.IDvehiculo+"|"+this.IDtipo+"|"+this.IDcomprador);
+            pw.println(this.ID+"|"+this.IDvehiculo+"|"+this.IDtipo+"|"+this.IDcomprador+"|"+this.precioOfertado);
         }
         catch(Exception e)
         {
@@ -98,7 +108,7 @@ public class Oferta {
             while (sc.hasNextLine()){
                 String linea = sc.next();
                 String [] arreglo = linea.split("\\|");
-                Oferta o = new Oferta(Integer.parseInt(arreglo[0]), Integer.parseInt(arreglo[1]), Integer.parseInt(arreglo[2]), Integer.parseInt(arreglo[3]));
+                Oferta o = new Oferta(Integer.parseInt(arreglo[0]), Integer.parseInt(arreglo[1]), Integer.parseInt(arreglo[2]), Integer.parseInt(arreglo[3]), Double.parseDouble(arreglo[4]));
                 oferta.add(o);
             }
         }catch(Exception ex){
@@ -112,7 +122,7 @@ public class Oferta {
         return  this.ID + ", " + this.IDvehiculo + ", " + this.IDtipo + ", " + this.IDcomprador;
     }
     
-    public static Oferta registrarNuevaOferta(Vehiculo vehiculo, Comprador comprador, String nomfile)
+    public static Oferta registrarNuevaOferta(Vehiculo vehiculo, Comprador comprador, double precioOfertado, String nomfile)
      {
         int id = Util.nextID(nomfile);
         int IDvehiculo = vehiculo.getIDvehiculo();
@@ -124,7 +134,7 @@ public class Oferta {
             IDtipo = 2; 
         else if (vehiculo instanceof Camioneta)
             IDtipo = 3; 
-        Oferta nuevo = new Oferta(id,IDvehiculo, IDtipo, IDcomprador);
+        Oferta nuevo = new Oferta(id,IDvehiculo, IDtipo, IDcomprador, precioOfertado);
         return nuevo;
     }
     

@@ -131,4 +131,102 @@ public class Util {
         int subopcion = sc.nextInt();
         return subopcion;
     }
+    
+    public static String ofertarVehiculos(Scanner sc,int i, int fin)
+    {
+        String opc = "";
+        int op;
+        if(i == 0)
+        {
+            System.out.println("1.- Siguiente Vehiculo");
+            System.out.println("2.- Ofertar");
+            System.out.println("\nIngrese la opcion:");
+            op = sc.nextInt();
+            if(op == 1)
+                opc = "siguiente";
+            else if(op == 2)
+                opc = "ofertar";
+            else
+                System.out.println("Opcion invalida");
+        }
+        else if(i == fin)
+        {
+            System.out.println("1.- Anterior Vehiculo");
+            System.out.println("2.- Ofertar");
+            System.out.println("\nIngrese la opcion:");
+            op = sc.nextInt();
+            if(op == 1)
+                opc = "siguiente";
+            else if(op == 2)
+                opc = "ofertar";
+            else
+                System.out.println("Opcion invalida");
+        }
+        else
+        {
+            System.out.println("1.- Siguiente Vehiculo");
+            System.out.println("2.- Anterior Vehiculo");
+            System.out.println("3.- Ofertar");   
+            System.out.println("\nIngrese la opcion:");
+            op = sc.nextInt();
+            if(op == 1)
+                opc = "siguiente";
+            else if(op == 2)
+                opc = "anterior";
+            else if(op == 3)
+                opc = "ofertar";
+            else
+                System.out.println("Opcion invalida");
+        } 
+        return opc;
+    }
+    
+    public static String aceptarOfertas(Scanner sc,int i, int fin)
+    {
+        String opc = "";
+        int op;
+        if(i == 0)
+        {
+            System.out.println("1.- Siguiente Oferta");
+            System.out.println("2.- Aceptar Oferta");
+            System.out.println("\nIngrese la opcion:");
+            op = sc.nextInt();
+            if(op == 1)
+                opc = "siguiente";
+            else if(op == 2)
+                opc = "aceptar";
+            else
+                System.out.println("Opcion invalida");
+        }
+        else if(i == fin)
+        {
+            System.out.println("1.- Anterior Oferta");
+            System.out.println("2.- Aceptar Oferta");
+            System.out.println("\nIngrese la opcion:");
+            op = sc.nextInt();
+            if(op == 1)
+                opc = "siguiente";
+            else if(op == 2)
+                opc = "aceptar";
+            else
+                System.out.println("Opcion invalida");
+        }
+        else
+        {
+            System.out.println("1.- Siguiente Oferta");
+            System.out.println("2.- Anterior Oferta");
+            System.out.println("3.- Aceptar Oferta");   
+            System.out.println("\nIngrese la opcion:");
+            op = sc.nextInt();
+            if(op == 1)
+                opc = "siguiente";
+            else if(op == 2)
+                opc = "anterior";
+            else if(op == 3)
+                opc = "aceptar";
+            else
+                System.out.println("Opcion invalida");
+        } 
+        return opc;
+    }
 }

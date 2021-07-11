@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import ec.edu.espol.model.Motocicleta;
 import ec.edu.espol.model.Oferta;
+import ec.edu.espol.model.Vehiculo;
 import ec.edu.espol.model.Vendedor;
 import ec.edu.espol.util.Util;
 import java.security.InvalidParameterException;
@@ -34,6 +35,16 @@ public class Main {
         int id;
         int opcion; //Guardaremos la opcion del usuario
         int subopcion;
+        ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+        ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
+        ArrayList<Comprador> compradores = Comprador.readFile("comprador.txt");
+        ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
+        ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
+        ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt"); 
+        ArrayList<Ingreso> ingresos = Ingreso.readFile("ingreso.txt");
+        ArrayList<Oferta> ofertas = Oferta.readFile("oferta.txt");
+        Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos);
+        Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
 
         do{
             boolean sub_salir = false;
@@ -43,12 +54,12 @@ public class Main {
                 case 1:
                 {
                     do{
-                        ArrayList<Vendedor> vendedores = Vendedor.readFile("vendedor.txt");
-                        ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
-                        ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
-                        ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
-                        ArrayList<Ingreso> ingresos = Ingreso.readFile("ingreso.txt");
-                        Ingreso.link(vendedores, automoviles, camionetas, motocicletas, ingresos);
+                        vendedores = Vendedor.readFile("vendedor.txt");
+                        automoviles = Automovil.readFile("automovil.txt");
+                        camionetas = Camioneta.readFile("camioneta.txt");
+                        motocicletas = Motocicleta.readFile("motocicleta.txt"); 
+                        ingresos = Ingreso.readFile("ingreso.txt");
+                        Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos);
                         subopcion = Util.MenuVendedor(sn);
                         switch(subopcion){
                             case 1:
@@ -61,24 +72,7 @@ public class Main {
                                 break;
                             
                             case 3:
-                                System.out.println("\n=ACEPTAR OFERTA=");
-                                System.out.println("Ingrese correo: ");
-                                String correo = sn.next();
-                                System.out.println("Ingrese clave: ");
-                                String clave = sn.next();
-                                for (int i=0;i<vendedores.size();i++){
-                                    String clave_i = vendedores.get(i).getClave();//clave del vendedor que estamos tomando
-                                    String correo_i = vendedores.get(i).getCorreo();//correo del vendedor que estamos tomando
-                                    if (correo_i.equals(correo) && clave_i.equals(Util.toHexString(Util.getSHA(clave)))){
-                                        System.out.println("Ingrese la placa del vehiculo: ");
-                                        String placa = sn.nextLine();                                     
-                                        Util.enviarEmail("rsgarcia@espol.edu.ec", "prueba");
-                                    }
-                                    
-                                    else
-                                        System.out.println("Usuario o contraseña incorrectos");
-                                    
-                                }
+                                Vendedor.aceptarOferta(sn, vendedores, ofertas);
                                 break;
                                 
                             case 4:
@@ -90,15 +84,17 @@ public class Main {
                         }
                     }
                     while(subopcion != 4);
+                    break;
                 }
                     
                 case 2:
+                {
                     do{
-                        ArrayList<Comprador> compradores = Comprador.readFile("comprador.txt");
-                        ArrayList<Automovil> automoviles = Automovil.readFile("automovil.txt");
-                        ArrayList<Camioneta> camionetas = Camioneta.readFile("camioneta.txt");
-                        ArrayList<Motocicleta> motocicletas = Motocicleta.readFile("motocicleta.txt");
-                        ArrayList<Oferta> ofertas = Oferta.readFile("oferta.txt");
+                        compradores = Comprador.readFile("comprador.txt");
+                        automoviles = Automovil.readFile("automovil.txt");
+                        camionetas = Camioneta.readFile("camioneta.txt");
+                        motocicletas = Motocicleta.readFile("motocicleta.txt");
+                        ofertas = Oferta.readFile("oferta.txt");
                         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
                         subopcion = Util.MenuComprador(sn);
                         switch(subopcion){
@@ -107,8 +103,7 @@ public class Main {
                                 break;
                             
                             case 2:
-                                
-                                 
+                                Comprador.OfertarVehiculo(sn, vehiculos, compradores);                                
                                 break;
                                 
                             case 3:
@@ -118,16 +113,17 @@ public class Main {
                                 System.out.println("El submenu solo tiene 3 opciones");
                         }
                     }while(!sub_salir);
-
+                    break;
+                }        
                     
                 case 3:
-                    System.out.println("Gracias");;
+                    System.out.println("Gracias");
+                    break;
                     
                 default:
                     System.out.println("El programa solo tiene 3 opciones");
            }
           
-       }while(opcion != 3);
-    
+       }while(opcion != 3);  
     }
 }   

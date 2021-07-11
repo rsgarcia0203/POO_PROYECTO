@@ -150,5 +150,43 @@ public class Vehiculo {
     public void setOfertas(ArrayList<Oferta> ofertas) {
         this.ofertas = ofertas;
     }
-
+    
+    public static ArrayList<Vehiculo> vehiculosxRecorrido(ArrayList<Vehiculo> vehiculos, double recorridoInicio, double recorridoFinal)
+    {
+        ArrayList<Vehiculo> xRecorrido = new ArrayList <>();
+        for(Vehiculo v: vehiculos)
+        {
+            if(v.getRecorrido() >= recorridoInicio && v.getRecorrido() <= recorridoFinal)
+            {
+                xRecorrido.add(v);
+            }
+        }
+        return xRecorrido;
+    }
+    
+    public static ArrayList<Vehiculo> vehiculosxAño(ArrayList<Vehiculo> vehiculos, int añoInicio, int añoFinal)
+    {
+        ArrayList<Vehiculo> xAño = new ArrayList <>();
+        for(Vehiculo v: vehiculos)
+        {
+            if(v.getAño() >= añoInicio && v.getAño() <= añoFinal)
+            {
+                xAño.add(v);
+            }
+        }
+        return xAño;
+    }
+    
+    public static ArrayList<Vehiculo> vehiculosxPrecio(ArrayList<Vehiculo> vehiculos, double precioInicio, double precioFinal)
+    {
+        ArrayList<Vehiculo> xPrecio = new ArrayList <>();
+        for(Vehiculo v: vehiculos)
+        {
+            if(v.getPrecio() >= precioInicio && v.getPrecio() <= precioFinal)
+            {
+                xPrecio.add(v);
+            }
+        }
+        return xPrecio;
+    } 
 }

@@ -127,7 +127,7 @@ public class Ingreso {
         
     }
     
-    public static void link(ArrayList<Vendedor> vendedores, ArrayList<Automovil> automoviles, ArrayList<Camioneta> camionetas, ArrayList<Motocicleta> motocicletas, ArrayList<Ingreso> ingresos){
+    public static void link(ArrayList<Vendedor> vendedores, ArrayList<Vehiculo> vehiculos, ArrayList<Automovil> automoviles, ArrayList<Camioneta> camionetas, ArrayList<Motocicleta> motocicletas, ArrayList<Ingreso> ingresos){
         for(Ingreso i: ingresos){
             Vendedor v = Vendedor.searchByID(vendedores, i.getIdVendedor());
             switch(i.getIdTipo())
@@ -138,6 +138,7 @@ public class Ingreso {
                     au.setVendedor(v);
                     i.setVendedor(v);
                     i.setVehiculo(au);
+                    vehiculos.add(au);
                     break; 
                    
                 case 2:
@@ -146,6 +147,7 @@ public class Ingreso {
                     mo.setVendedor(v);
                     i.setVendedor(v);
                     i.setVehiculo(mo);
+                    vehiculos.add(mo);
                     break; 
                     
                 case 3:
@@ -154,6 +156,7 @@ public class Ingreso {
                     ca.setVendedor(v);
                     i.setVendedor(v);
                     i.setVehiculo(ca);
+                    vehiculos.add(ca);
                     break; 
             }                      
         }
