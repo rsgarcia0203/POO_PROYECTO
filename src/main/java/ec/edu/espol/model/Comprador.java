@@ -154,7 +154,7 @@ public class Comprador {
         }
     }
      
-     public static void OfertarVehiculo(int año1, int año2, double recorrido1, double recorrido2, double precio1, double precio2){
+     public static void OfertarVehiculo(){
         
      }
 }

@@ -123,16 +123,12 @@ public class Oferta {
     
     public static void link(ArrayList<Vendedor> vendedores, ArrayList<Vehiculo> vehiculos, ArrayList<Ingreso> ingresos){
         for(Ingreso i: ingresos){
-            Vehiculo vh = Vehiculo.searchByID(vehiculos, i.getIdVehiculo());
-            Vendedor v = Vendedor.searchByID(vendedores, i.getIdVendedor());
-            v.getVehiculos().add(vh);
-            vh.setVendedor(v);
-            i.setVendedor(v);
-            i.setVehiculo(vh);
+            //Vehiculo vh = Vehiculo.searchByID(vehiculos, i.getIdVehiculo());
+            //Vendedor v = Vendedor.searchByID(vendedores, i.getIdVendedor());
+            //v.getVehiculos().add(vh);
+            //.setVendedor(v);
+            //i.setVendedor(v);
+            //i.setVehiculo(vh);
         }
-    }
-    
-    public void OfertarVehiculo(Comprador comprador, ArrayList<Vehiculo> vehiculos){
-        
     }
 }

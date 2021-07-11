@@ -33,6 +33,16 @@ public class Motocicleta extends Vehiculo{
         this.ID = ID;
     }      
      
+    public static Motocicleta searchByID(ArrayList<Motocicleta> motocicletas, int id)
+    {
+        for(Motocicleta mo : motocicletas)
+        {
+            if(mo.IDvehiculo == id)
+                return mo;
+        }
+        return null;
+    }
+
      public static void nextMotocicleta(Scanner sc, int IDvendedor, ArrayList<Motocicleta> motocicletas, String nomfile){
         sc.useLocale(Locale.US);
         int IDvehiculo = Util.nextID("ingreso.txt");

@@ -139,17 +139,6 @@ public class Vehiculo {
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
-    }
-    
-    public static Vehiculo searchByID(ArrayList<Vehiculo> vehiculos, int id)
-    {
-        for(Vehiculo v : vehiculos)
-        {
-            if(v.IDvehiculo == id)
-                return v;
-        }
-        return null;
-    }
-    
+    }    
           
 }

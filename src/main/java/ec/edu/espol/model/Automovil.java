@@ -53,6 +53,16 @@ public class Automovil extends Vehiculo{
         this.transmision = transmision;
     }
     
+    public static Automovil searchByID(ArrayList<Automovil> automoviles, int id)
+    {
+        for(Automovil au : automoviles)
+        {
+            if(au.IDvehiculo == id)
+                return au;
+        }
+        return null;
+    }
+    
     public static void nextAutomovil(Scanner sc, int IDvendedor, ArrayList<Automovil> automoviles, String nomfile){
         int id = Util.nextID(nomfile);
         int IDvehiculo = Util.nextID("ingreso.txt");

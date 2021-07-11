@@ -48,7 +48,7 @@ public class Ingreso {
     }
 
     public int getIdVehiculo() {
-        return idVehiculo;
+        return this.idVehiculo;
     }
 
     public void setIdVehiculo(int idVehiculo) {
@@ -127,14 +127,36 @@ public class Ingreso {
         
     }
     
-    public static void link(ArrayList<Vendedor> vendedores, ArrayList<Vehiculo> vehiculos, ArrayList<Ingreso> ingresos){
+    public static void link(ArrayList<Vendedor> vendedores, ArrayList<Automovil> automoviles, ArrayList<Camioneta> camionetas, ArrayList<Motocicleta> motocicletas, ArrayList<Ingreso> ingresos){
         for(Ingreso i: ingresos){
-            Vehiculo vh = Vehiculo.searchByID(vehiculos, i.getIdVehiculo());
             Vendedor v = Vendedor.searchByID(vendedores, i.getIdVendedor());
-            v.getVehiculos().add(vh);
-            vh.setVendedor(v);
-            i.setVendedor(v);
-            i.setVehiculo(vh);
+            switch(i.getIdTipo())
+            {
+                case 1:
+                    Automovil au = Automovil.searchByID(automoviles, i.getIdVehiculo());
+                    v.getVehiculos().add(au);
+                    au.setVendedor(v);
+                    i.setVendedor(v);
+                    i.setVehiculo(au);
+                    break; 
+                   
+                case 2:
+                    Motocicleta mo = Motocicleta.searchByID(motocicletas, i.getIdVehiculo());
+                    v.getVehiculos().add(mo);
+                    mo.setVendedor(v);
+                    i.setVendedor(v);
+                    i.setVehiculo(mo);
+                    break; 
+                    
+                case 3:
+                    Camioneta ca = Camioneta.searchByID(camionetas, i.getIdVehiculo());
+                    v.getVehiculos().add(ca);
+                    ca.setVendedor(v);
+                    i.setVendedor(v);
+                    i.setVehiculo(ca);
+                    break; 
+            }
+                        
         }
     }
     

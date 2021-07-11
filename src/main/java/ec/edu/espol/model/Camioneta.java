@@ -63,6 +63,16 @@ public class Camioneta extends Vehiculo{
         this.traccion = traccion;
     }
     
+    public static Camioneta searchByID(ArrayList<Camioneta> camionetas, int id)
+    {
+        for(Camioneta ca : camionetas)
+        {
+            if(ca.IDvehiculo == id)
+                return ca;
+        }
+        return null;
+    }
+
     public static void nextCamioneta(Scanner sc, int IDvendedor, ArrayList<Camioneta> camionetas, String nomfile){
         sc.useLocale(Locale.US);
         int IDvehiculo = Util.nextID("ingreso.txt");
