@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import ec.edu.espol.util.Util;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -19,13 +20,15 @@ public class Ingreso {
     private int ID;
     private int idVendedor;
     private int idVehiculo;
+    private int idTipo;
     private Vendedor vendedor;
     private Vehiculo vehiculo;
 
-    public Ingreso(int ID, int idVendedor, int idVehiculo) {
+    public Ingreso(int ID, int idVendedor, int idVehiculo, int idTipo) {
         this.ID = ID;
         this.idVendedor = idVendedor;
         this.idVehiculo = idVehiculo;
+        this.idTipo = idTipo;
     }
 
     public int getID() {
@@ -52,6 +55,14 @@ public class Ingreso {
         this.idVehiculo = idVehiculo;
     }
 
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
+    
     public Vendedor getVendedor() {
         return vendedor;
     }
@@ -71,7 +82,7 @@ public class Ingreso {
     public void saveFile(String nomfile){
         try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomfile),true)))
         {
-            pw.println(this.ID+"|"+this.idVendedor+"|"+this.idVehiculo);
+            pw.println(this.ID+"|"+this.idVendedor+"|"+this.idVehiculo+"|"+this.idTipo);
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -84,7 +95,7 @@ public class Ingreso {
             {
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
-                Ingreso i = new Ingreso(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]));
+                Ingreso i = new Ingreso(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]));
                 ingresos.add(i);
             }
         }
@@ -92,6 +103,28 @@ public class Ingreso {
             System.out.println(e.getMessage());
         }
         return ingresos;
+    }
+    
+    public static void nextIngreso(Vehiculo vehiculo, String nomfile){
+        int ID = Util.nextID("ingreso.txt");
+        int idvehiculo = vehiculo.getIDvehiculo();
+        int idvendedor = vehiculo.getIDvendedor();
+        if(vehiculo instanceof Automovil)
+        {
+            Ingreso i = new Ingreso(ID,idvehiculo,idvendedor,1);
+            i.saveFile(nomfile);
+        }
+        else if(vehiculo instanceof Motocicleta)
+        {
+            Ingreso i = new Ingreso(ID,idvehiculo,idvendedor,2);
+            i.saveFile(nomfile);
+        }
+        else if(vehiculo instanceof Camioneta)
+        {
+            Ingreso i = new Ingreso(ID,idvehiculo,idvendedor,3);
+            i.saveFile(nomfile);
+        }    
+        
     }
     
     public static void link(ArrayList<Vendedor> vendedores, ArrayList<Vehiculo> vehiculos, ArrayList<Ingreso> ingresos){

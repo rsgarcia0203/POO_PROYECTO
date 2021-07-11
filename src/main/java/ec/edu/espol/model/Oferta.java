@@ -20,12 +20,14 @@ public class Oferta {
     private int ID;
     private int IDvendedor;
     private int IDvehiculo;
+    private int IDtipo; //guardaremos el ID del tipo dependiendo del tipo
     private String correo;
     
-    public Oferta(int ID, int IDvendedor, int IDvehiculo, String correo){
+    public Oferta(int ID, int IDvendedor, int IDvehiculo, int IDtipo, String correo){
         this.ID = ID;
         this.IDvendedor = IDvendedor;
         this.IDvehiculo = IDvehiculo;
+        this.IDtipo = IDtipo;
         this.correo = correo;
     }
 
@@ -53,6 +55,14 @@ public class Oferta {
         this.IDvehiculo = IDvehiculo;
     }
 
+    public int getIDtipo() {
+        return IDtipo;
+    }
+
+    public void setIDtipo(int IDtipo) {
+        this.IDtipo = IDtipo;
+    }
+    
     public String getCorreo() {
         return this.correo;
     }
@@ -80,7 +90,7 @@ public class Oferta {
             while (sc.hasNextLine()){
                 String linea = sc.next();
                 String [] arreglo = linea.split("\\|");
-                Oferta o = new Oferta(Integer.parseInt(arreglo[0]), Integer.parseInt(arreglo[1]), Integer.parseInt(arreglo[2]), arreglo[3]);
+                Oferta o = new Oferta(Integer.parseInt(arreglo[0]), Integer.parseInt(arreglo[1]), Integer.parseInt(arreglo[2]), Integer.parseInt(arreglo[3]), arreglo[4]);
                 oferta.add(o);
             }
         }catch(Exception ex){
@@ -91,16 +101,23 @@ public class Oferta {
     
     @Override
     public String toString() {
-        return  this.ID + ", " + this.IDvendedor + ", " + this.IDvehiculo + ", " + this.correo;
+        return  this.ID + ", " + this.IDvendedor + ", " + this.IDvehiculo + ", " + this.IDtipo + ", " + this.correo;
     }
     
     public static Oferta registrarNuevaOferta(Vendedor vendedor, Vehiculo vehiculo, Comprador comprador, String nomfile)
      {
         int id = Util.nextID(nomfile);
         int IDvendedor = vendedor.getID();
-        int IDvehiculo = vehiculo.getID();
+        int IDvehiculo = vehiculo.getIDvehiculo();
+        int IDtipo = 0;
+        if (vehiculo instanceof Automovil)
+            IDtipo = 1; 
+        else if (vehiculo instanceof Motocicleta)
+            IDtipo = 2; 
+        else if (vehiculo instanceof Camioneta)
+            IDtipo = 3; 
         String correo = comprador.getCorreo();
-        Oferta nuevo = new Oferta(id,IDvendedor,IDvehiculo,correo);
+        Oferta nuevo = new Oferta(id,IDvendedor,IDvehiculo, IDtipo,correo);
         return nuevo;
     }
     

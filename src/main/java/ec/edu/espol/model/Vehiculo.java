@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @author rsgar
  */
 public class Vehiculo {
-    protected int ID;
+    protected int IDvehiculo;
     protected int IDvendedor;
     protected String placa;
     protected String marca;
@@ -30,9 +30,9 @@ public class Vehiculo {
     protected double precio;
     protected Vendedor vendedor;
     
-    public Vehiculo(int ID, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, double precio){
+    public Vehiculo(int IDvehiculo, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, double precio){
         this.IDvendedor = IDvendedor;
-        this.ID = ID;
+        this.IDvehiculo = IDvehiculo;
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
@@ -45,12 +45,12 @@ public class Vehiculo {
         this.vendedor = null;
     }
 
-    public int getID() {
-        return this.ID;
+    public int getIDvehiculo() {
+        return this.IDvehiculo;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setIDvehiculo(int IDvehiculo) {
+        this.IDvehiculo = IDvehiculo;
     }
 
     public int getIDvendedor() {
@@ -145,20 +145,11 @@ public class Vehiculo {
     {
         for(Vehiculo v : vehiculos)
         {
-            if(v.ID == id)
+            if(v.IDvehiculo == id)
                 return v;
         }
         return null;
     }
     
-    public static void saveFile(String nomFile, int idtipo, int idclase){
-        try(PrintWriter pw = new PrintWriter(new FileOutputStream(new File(nomFile), true))){
-            int ID = Util.nextID(nomFile);
-            pw.println(ID+"|"+idtipo+"|"+idclase);
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    } 
-      
+          
 }

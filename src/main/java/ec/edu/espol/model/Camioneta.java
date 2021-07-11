@@ -18,17 +18,27 @@ import java.util.Scanner;
  * @author rsgar
  */
 public class Camioneta extends Vehiculo{
+    private int ID;
     private String traccion;
     private String transmision;
     private String vidrios;
     
-    public Camioneta(int ID, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, String vidrios, String transmision, String traccion, double precio){
-        super(ID, IDvendedor, placa, marca, modelo, tipo_motor, año, recorrido, color, tipo_combustible, precio);
+    public Camioneta(int ID, int IDvehiculo, int IDvendedor, String placa, String marca, String modelo, String tipo_motor, int año, double recorrido, String color, String tipo_combustible, String vidrios, String transmision, String traccion, double precio){
+        super(IDvehiculo, IDvendedor, placa, marca, modelo, tipo_motor, año, recorrido, color, tipo_combustible, precio);
+        this.ID = ID;
         this.traccion = traccion;
         this.vidrios = vidrios;
         this.transmision = transmision;
     }
-    
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+       
     public String getVidrios() {
         return this.vidrios;
     }
@@ -55,6 +65,7 @@ public class Camioneta extends Vehiculo{
     
     public static void nextCamioneta(Scanner sc, int IDvendedor, ArrayList<Camioneta> camionetas, String nomfile){
         sc.useLocale(Locale.US);
+        int IDvehiculo = Util.nextID("ingreso.txt");
         int id = Util.nextID(nomfile);
         System.out.println("Ingrese la placa: ");
         String placa = sc.next();
@@ -80,16 +91,16 @@ public class Camioneta extends Vehiculo{
         String traccion =sc.next();
         System.out.println("Ingrese el precio: ");
         Double precio =sc.nextDouble();
-        Camioneta ca = new Camioneta(id, IDvendedor, placa, marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
+        Camioneta ca = new Camioneta(id, IDvehiculo, IDvendedor, placa, marca, modelo, tipodeMotor, anio, recorrido,color,TipoCombustible,vidrio,transmision,traccion,precio);
         if (camionetas.isEmpty()){
             ca.saveFile("camioneta.txt");
             System.out.println("Camioneta registrada."); 
-            Vehiculo.saveFile("vehiculo.txt",3,id);
+            Ingreso.nextIngreso(ca,"ingreso.txt");
         }
         for (int j=0; j<camionetas.size();j++){
             if (!(ca.getPlaca().equals(camionetas.get(j).getPlaca()))){
                 ca.saveFile("camioneta.txt");
-                Vehiculo.saveFile("vehiculo.txt",3,id);
+                Ingreso.nextIngreso(ca,"ingreso.txt");
             }
             else
                 System.out.println("Error, placa existente en el sistema");                                      
@@ -115,7 +126,7 @@ public class Camioneta extends Vehiculo{
                 String linea = sc.nextLine();
                 String[] tokens = linea.split("\\|");
                 Camioneta c;
-                c = new Camioneta(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),tokens[2],tokens[3],tokens[4],tokens[5],Integer.parseInt(tokens[6]),Double.parseDouble(tokens[7]),tokens[8],tokens[9],tokens[10],tokens[11],tokens[12],Double.parseDouble(tokens[13]));
+                c = new Camioneta(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),tokens[3],tokens[4],tokens[5],tokens[6],Integer.parseInt(tokens[7]),Double.parseDouble(tokens[8]),tokens[9],tokens[10],tokens[11],tokens[12],tokens[13],Double.parseDouble(tokens[14]));
                 camioneta.add(c);
             }
         }
@@ -127,7 +138,7 @@ public class Camioneta extends Vehiculo{
     
     @Override
     public String toString() {
-        return "Camioneta{ ID=" + super.ID + ", IDvendedor=" + super.IDvendedor + ", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + 
-                ", color=" + super.color + ", tipo_combustible=" + super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision +", traccion="+ this.traccion+ ", precio=" + precio + '}';
+        return "Camioneta{ ID=" + this.ID +", IDvehiculo= " + super.IDvehiculo + ", IDvendedor=" + super.IDvendedor + ", placa=" + super.placa + ", marca=" + super.marca + ", modelo=" + super.modelo + ", tipo_motor=" + super.tipo_motor + ", anio=" + super.año + ", recorrido=" + super.recorrido + ", color=" + super.color + ", tipo_combustible=" + 
+                super.tipo_combustible +", vidrio="+ this.vidrios + ", Transmision="+this.transmision +", traccion="+ this.traccion+ ", precio=" + super.precio + "}";
     }
 }
