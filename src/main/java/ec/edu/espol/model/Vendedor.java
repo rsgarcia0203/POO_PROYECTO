@@ -149,18 +149,23 @@ public class Vendedor {
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
         Vendedor nuevo = new Vendedor(id, nombres, apellidos, organizacion, correo, clave);
+        boolean validarCorreo = false;
         if (vendedores.isEmpty()) {
             nuevo.saveFile(nomfile);
             System.out.println("Vendedor registrado!");
-        } else {
-            for (int i = 0; i < vendedores.size(); i++) {
-                if (!(vendedores.get(i).getCorreo().equals(correo))) {
-                    nuevo.saveFile(nomfile);
-                    System.out.println("Vendedor registrado!");
-                } else {
-                    System.out.println("Correo repetido, no se puede registrar!");
-                }
+        } 
+        else {
+            for (Vendedor v: vendedores) {
+                if (!(v.getCorreo().equals(correo))) {
+                    validarCorreo = true;
+                } 
             }
+            if(validarCorreo == true){
+                nuevo.saveFile(nomfile);
+                System.out.println("Vendedor registrado!");
+            }
+            else
+                System.out.println("Correo repetido, no se puede registrar!");
         }
     }
 
@@ -253,9 +258,9 @@ public class Vendedor {
                                         Ingreso.eliminarIngreso(ingresos, v);
                                         Oferta.eliminarOferta(ofertas, v);
                                         Vehiculo.eliminarVehiculo(vehiculos, v);
-
-                                    }
-
+                                        break;
+                                    } else if (op.equals("regresar"))
+                                        break;
                                 }
                             }
                         }

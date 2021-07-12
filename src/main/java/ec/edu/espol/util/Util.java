@@ -132,31 +132,38 @@ public class Util {
             if (i == 0) {
                 System.out.println("1.- Siguiente Vehiculo");
                 System.out.println("2.- Ofertar");
+                System.out.println("3.- Regresar");
                 System.out.println("\nIngrese la opcion:");
                 op = sc.nextInt();
                 if (op == 1) {
                     opc = "siguiente";
                 } else if (op == 2) {
                     opc = "ofertar";
-                } else {
+                } else if (op == 3){
+                    opc = "regresar";
+                }else {
                     System.out.println("Opcion invalida");
                 }
             } else if (i == fin) {
                 System.out.println("1.- Anterior Vehiculo");
                 System.out.println("2.- Ofertar");
+                System.out.println("3.- Regresar");
                 System.out.println("\nIngrese la opcion:");
                 op = sc.nextInt();
                 if (op == 1) {
-                    opc = "siguiente";
+                    opc = "anterior";
                 } else if (op == 2) {
                     opc = "ofertar";
-                } else {
+                } else if (op == 3){
+                    opc = "regresar";
+                }else {
                     System.out.println("Opcion invalida");
                 }
             } else {
                 System.out.println("1.- Siguiente Vehiculo");
                 System.out.println("2.- Anterior Vehiculo");
                 System.out.println("3.- Ofertar");
+                System.out.println("4.- Regresar");
                 System.out.println("\nIngrese la opcion:");
                 op = sc.nextInt();
                 if (op == 1) {
@@ -165,17 +172,22 @@ public class Util {
                     opc = "anterior";
                 } else if (op == 3) {
                     opc = "ofertar";
-                } else {
+                } else if (op == 4){
+                    opc = "regresar";
+                }else {
                     System.out.println("Opcion invalida");
                 }
             }
         } else {
             System.out.println("1.- Ofertar");
+            System.out.println("2.- Regresar");
             System.out.println("\nIngrese la opcion:");
             op = sc.nextInt();
             if (op == 1) {
                 opc = "ofertar";
-            } else {
+            } else if (op == 2){
+                opc = "regresar";
+            }else {
                 System.out.println("Opcion invalida");
             }
         }
@@ -189,24 +201,30 @@ public class Util {
             if (i == 0) {
                 System.out.println("1.- Siguiente Oferta");
                 System.out.println("2.- Aceptar Oferta");
+                System.out.println("3.- Regresar");
                 System.out.println("\nIngrese la opcion:");
                 op = sc.nextInt();
                 if (op == 1) {
                     opc = "siguiente";
                 } else if (op == 2) {
                     opc = "aceptar";
+                } else if (op == 3){
+                    opc = "regresar";
                 } else {
                     System.out.println("Opcion invalida");
                 }
             } else if (i == fin) {
                 System.out.println("1.- Anterior Oferta");
                 System.out.println("2.- Aceptar Oferta");
+                System.out.println("3.- Regresar");
                 System.out.println("\nIngrese la opcion:");
                 op = sc.nextInt();
                 if (op == 1) {
-                    opc = "siguiente";
+                    opc = "anterior";
                 } else if (op == 2) {
                     opc = "aceptar";
+                } else if (op == 3){
+                    opc = "regresar";
                 } else {
                     System.out.println("Opcion invalida");
                 }
@@ -214,6 +232,7 @@ public class Util {
                 System.out.println("1.- Siguiente Oferta");
                 System.out.println("2.- Anterior Oferta");
                 System.out.println("3.- Aceptar Oferta");
+                System.out.println("4.- Regresar");
                 System.out.println("\nIngrese la opcion:");
                 op = sc.nextInt();
                 if (op == 1) {
@@ -222,17 +241,22 @@ public class Util {
                     opc = "anterior";
                 } else if (op == 3) {
                     opc = "aceptar";
-                } else {
+                } else if (op == 4){
+                    opc = "regresar";
+                }else {
                     System.out.println("Opcion invalida");
                 }
             }
         } else {
             System.out.println("1.- Aceptar Oferta");
+            System.out.println("2.- Regresar");
             System.out.println("\nIngrese la opcion:");
             op = sc.nextInt();
             if (op == 1) {
                 opc = "aceptar";
-            } else {
+            } else if (op == 2){
+                opc = "regresar";
+            }else {
                 System.out.println("Opcion invalida");
             }
         }

@@ -43,9 +43,8 @@ public class Main {
         ArrayList<Oferta> ofertas = Oferta.readFile("oferta.txt");
         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
         Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos); 
-        for (Vendedor v: vendedores){
-            for(Vehiculo vh: v.getVehiculos())
-                System.out.println(vh.getOfertas());
+        for (Vehiculo v: vehiculos){
+            System.out.println(v);
         }
              
         do{
@@ -120,7 +119,7 @@ public class Main {
                 }        
                     
                 case 3:
-                    System.out.println("Gracias");
+                    System.out.println("\nGracias por usar nuestro sistema.");
                     break;
                     
                 default:

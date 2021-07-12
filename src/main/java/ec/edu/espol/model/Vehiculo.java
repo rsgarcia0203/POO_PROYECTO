@@ -224,12 +224,12 @@ public class Vehiculo {
         Util.limpiarArchivo("camioneta.txt");
         for(Vehiculo v: vehiculos)
         {
-            if(vehiculo instanceof Automovil)
-                ((Automovil) vehiculo).saveFile("automovil.txt");
-            if(vehiculo instanceof Motocicleta)
-                ((Motocicleta) vehiculo).saveFile("motocicleta.txt");
-            if(vehiculo instanceof Camioneta)
-                ((Camioneta) vehiculo).saveFile("camioneta.txt");
+            if(v instanceof Automovil)
+                ((Automovil) v).saveFile("automovil.txt");
+            else if(v instanceof Motocicleta)
+                ((Motocicleta) v).saveFile("motocicleta.txt");
+            else if(v instanceof Camioneta)
+                ((Camioneta) v).saveFile("camioneta.txt");
         }
     }
 }
