@@ -30,7 +30,6 @@ public class Main {
     
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
         Scanner sn = new Scanner(System.in);
-        int id;
         int opcion; //Guardaremos la opcion del usuario
         int subopcion;
         ArrayList<Vehiculo> vehiculos = new ArrayList<>();
@@ -43,12 +42,8 @@ public class Main {
         ArrayList<Oferta> ofertas = Oferta.readFile("oferta.txt");
         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
         Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos); 
-        for (Vehiculo v: vehiculos){
-            System.out.println(v);
-        }
-             
+        System.out.println(vehiculos);
         do{
-            boolean sub_salir = false;
             opcion = Util.MenuPrincipal(sn);
             
             switch(opcion){
@@ -60,6 +55,7 @@ public class Main {
                         camionetas = Camioneta.readFile("camioneta.txt");
                         motocicletas = Motocicleta.readFile("motocicleta.txt"); 
                         ingresos = Ingreso.readFile("ingreso.txt");
+                        vehiculos.clear();
                         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
                         Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos);
                         subopcion = Util.MenuVendedor(sn);
@@ -77,7 +73,6 @@ public class Main {
                                 break;
                                 
                             case 4:
-                                sub_salir = true;
                                 break;
                             
                             default:
@@ -96,6 +91,7 @@ public class Main {
                         camionetas = Camioneta.readFile("camioneta.txt");
                         motocicletas = Motocicleta.readFile("motocicleta.txt");
                         ofertas = Oferta.readFile("oferta.txt");
+                        vehiculos.clear();
                         Oferta.link(compradores, automoviles, camionetas, motocicletas, ofertas);
                         Ingreso.link(vendedores, vehiculos, automoviles, camionetas, motocicletas, ingresos); 
                         subopcion = Util.MenuComprador(sn);
@@ -109,12 +105,11 @@ public class Main {
                                 break;
                                 
                             case 3:
-                                sub_salir = true;
                                 break;
                             default:
                                 System.out.println("El submenu solo tiene 3 opciones");
                         }
-                    }while(!sub_salir);
+                    }while(subopcion != 3);
                     break;
                 }        
                     

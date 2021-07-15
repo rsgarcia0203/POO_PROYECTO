@@ -135,23 +135,13 @@ public class Comprador {
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
         Comprador c = new Comprador(id, nombres, apellidos, organizacion, correo, clave);
-        boolean validarCorreo = false;
-        if (compradores.isEmpty()) {
+        if (compradores.contains(c) == false) {
             c.saveFile(nomfile);
             System.out.println("Comprador registrado!");
         } else {
-            for (Comprador co : compradores) {
-                if (!(co.getCorreo().equals(correo))) {
-                    validarCorreo = true;
-                }
-            }
-            if (validarCorreo == true) {
-                c.saveFile(nomfile);
-                System.out.println("Comprador registrado!");
-            } else {
-                System.out.println("Correo repetido, no se puede registrar!");
-            }
+            System.out.println("Comprador repetido, no se puede registrar!");
         }
+
     }
 
     public static void OfertarVehiculo(Scanner sc, ArrayList<Vehiculo> vehiculos, ArrayList<Comprador> compradores) throws NoSuchAlgorithmException {
@@ -214,8 +204,8 @@ public class Comprador {
                                     if (cont == 0) {
                                         System.out.println("No existen vehiculos con esos parametros de busqueda.");
                                     } else {
-                                        for(int e = 0; e < vehicles.size(); e++){
-                                            System.out.println("\n"+vehicles.get(e));
+                                        for (int e = 0; e < vehicles.size(); e++) {
+                                            System.out.println("\n" + vehicles.get(e));
                                             String op = Util.ofertarVehiculos(sc, e, vehicles.size() - 1);
                                             if (op.equals("anterior")) {
                                                 i -= 2;
@@ -224,9 +214,9 @@ public class Comprador {
                                                 precioOfertado = sc.nextDouble();
                                                 Oferta.registrarNuevaOferta(vehicles.get(e), compradores.get(i), precioOfertado, "oferta.txt");
                                                 break;
-                                            } else if(op.equals("regresar")){
+                                            } else if (op.equals("regresar")) {
                                                 break;
-                                            }        
+                                            }
                                         }
                                     }
                                     break;
@@ -241,8 +231,8 @@ public class Comprador {
                                     if (cont == 0) {
                                         System.out.println("No existen vehiculos con esos parametros de busqueda.");
                                     } else {
-                                        for(int e = 0; e < vehicles.size(); e++){
-                                            System.out.println("\n"+vehicles.get(e));
+                                        for (int e = 0; e < vehicles.size(); e++) {
+                                            System.out.println("\n" + vehicles.get(e));
                                             String op = Util.ofertarVehiculos(sc, e, vehicles.size() - 1);
                                             if (op.equals("anterior")) {
                                                 i -= 2;
@@ -251,9 +241,9 @@ public class Comprador {
                                                 precioOfertado = sc.nextDouble();
                                                 Oferta.registrarNuevaOferta(vehicles.get(e), compradores.get(i), precioOfertado, "oferta.txt");
                                                 break;
-                                            } else if(op.equals("regresar")){
+                                            } else if (op.equals("regresar")) {
                                                 break;
-                                            }         
+                                            }
                                         }
                                     }
                                     break;
@@ -268,8 +258,8 @@ public class Comprador {
                                     if (cont == 0) {
                                         System.out.println("No existen vehiculos con esos parametros de busqueda.");
                                     } else {
-                                        for(int e = 0; e < vehicles.size(); e++){
-                                            System.out.println("\n"+vehicles.get(e));
+                                        for (int e = 0; e < vehicles.size(); e++) {
+                                            System.out.println("\n" + vehicles.get(e));
                                             String op = Util.ofertarVehiculos(sc, e, vehicles.size() - 1);
                                             if (op.equals("anterior")) {
                                                 i -= 2;
@@ -278,9 +268,9 @@ public class Comprador {
                                                 precioOfertado = sc.nextDouble();
                                                 Oferta.registrarNuevaOferta(vehicles.get(e), compradores.get(i), precioOfertado, "oferta.txt");
                                                 break;
-                                            } else if(op.equals("regresar")){
+                                            } else if (op.equals("regresar")) {
                                                 break;
-                                            }        
+                                            }
                                         }
                                     }
                                     break;
@@ -296,9 +286,9 @@ public class Comprador {
                                             precioOfertado = sc.nextDouble();
                                             Oferta.registrarNuevaOferta(vehiculos.get(e), compradores.get(i), precioOfertado, "oferta.txt");
                                             break;
-                                        } else if(op.equals("regresar")){
-                                                break;
-                                            }
+                                        } else if (op.equals("regresar")) {
+                                            break;
+                                        }
                                     }
                                     break;
                             }

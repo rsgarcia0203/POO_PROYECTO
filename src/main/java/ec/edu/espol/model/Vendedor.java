@@ -132,7 +132,7 @@ public class Vendedor {
 
     @Override
     public String toString() {
-        return "Vendedor<"+this.ID+">{Nombres=" + this.nombres + ", Apellidos=" + this.apellidos + ", Organizacion=" + this.organizacion + ", Correo=" + this.correo + ", Clave=" + this.clave + "}";
+        return "Vendedor<" + this.ID + ">{Nombres=" + this.nombres + ", Apellidos=" + this.apellidos + ", Organizacion=" + this.organizacion + ", Correo=" + this.correo + ", Clave=" + this.clave + "}";
     }
 
     public static void registrarNuevoVendedor(Scanner sc, ArrayList<Vendedor> vendedores, String nomfile) {
@@ -149,24 +149,13 @@ public class Vendedor {
         System.out.println("Ingrese su clave: ");
         String clave = sc.next();
         Vendedor nuevo = new Vendedor(id, nombres, apellidos, organizacion, correo, clave);
-        boolean validarCorreo = false;
-        if (vendedores.isEmpty()) {
+        if (vendedores.contains(nuevo) == false) {
             nuevo.saveFile(nomfile);
             System.out.println("Vendedor registrado!");
-        } 
-        else {
-            for (Vendedor v: vendedores) {
-                if (!(v.getCorreo().equals(correo))) {
-                    validarCorreo = true;
-                } 
-            }
-            if(validarCorreo == true){
-                nuevo.saveFile(nomfile);
-                System.out.println("Vendedor registrado!");
-            }
-            else
-                System.out.println("Correo repetido, no se puede registrar!");
+        } else {
+            System.out.println("Vendedor repetido, no se puede registrar!");
         }
+
     }
 
     public static void registrarVehiculo(Scanner sc, ArrayList<Vendedor> vendedores, ArrayList<Automovil> automoviles, ArrayList<Camioneta> camionetas, ArrayList<Motocicleta> motocicletas) throws NoSuchAlgorithmException {
@@ -233,34 +222,39 @@ public class Vendedor {
                     {
                         if (v.getPlaca().equals(placa)) //verificamos que la palca sea correcta
                         {
-                            validarPlaca = true;   
+                            validarPlaca = true;
                             if (v.getOfertas().isEmpty()) //verificamos que ese vehiculo tenga ofertas
-                                System.out.println("No se han realizado ofertas para este vehiculo.");   
-                            else {
+                            {
+                                System.out.println("No se han realizado ofertas para este vehiculo.");
+                            } else {
                                 System.out.println("\nVehiculo{ Marca:" + v.getMarca() + ", Modelo:" + v.getModelo() + ", Precio: " + v.getPrecio() + "}");
                                 System.out.println("Se han realizado " + v.getOfertas().size() + " ofertas");
                                 ArrayList<Oferta> ofs = v.getOfertas();
-                                for (int e = 0; e < ofs.size(); e++) 
-                                {
+                                OUTER:
+                                for (int e = 0; e < ofs.size(); e++) {
                                     System.out.println("\n-Oferta <" + (e + 1) + ">-");
                                     System.out.println("Correo: " + ofs.get(e).getComprador().getCorreo());
                                     System.out.println("Precio Ofertado: $" + ofs.get(e).getPrecioOfertado() + "\n");
                                     String op = Util.aceptarOfertas(sc, e, ofs.size() - 1);
-                                    if (op.equals("anterior")) 
-                                    {
-                                        e -= 2;
-                                    } else if (op.equals("aceptar")) {
-                                        System.out.println("Oferta aceptada, se enviara un mensaje al correo del ofertante.");
-                                        String mensaje = "<H1><b>Estimado: " + ofs.get(e).getComprador().getNombres().toUpperCase() + " " + ofs.get(e).getComprador().getApellidos().toUpperCase() + "</b></H1></br></br>"
-                                                + "<H2>Le informamos a Ud. que su oferta por el vehiculo de placas " + v.getPlaca() + " ha sido aceptada, por favor ponerse en contacto con el dueño del vehiculo antes singularizado.</H2></br></br></br>"
-                                                + "<H2><em> SYSTEM-POO-G2 </em></H2>";
-                                        Util.enviarEmail(ofs.get(e).getComprador().getCorreo(), mensaje);
-                                        Ingreso.eliminarIngreso(ingresos, v);
-                                        Oferta.eliminarOferta(ofertas, v);
-                                        Vehiculo.eliminarVehiculo(vehiculos, v);
-                                        break;
-                                    } else if (op.equals("regresar"))
-                                        break;
+                                    switch (op) {
+                                        case "anterior":
+                                            e -= 2;
+                                            break;
+                                        case "aceptar":
+                                            System.out.println("Oferta aceptada, se enviara un mensaje al correo del ofertante.");
+                                            String mensaje = "<H1><b>Estimado: " + ofs.get(e).getComprador().getNombres().toUpperCase() + " " + ofs.get(e).getComprador().getApellidos().toUpperCase() + "</b></H1></br></br>"
+                                                    + "<H2>Le informamos a Ud. que su oferta por el vehiculo de placas " + v.getPlaca() + " ha sido aceptada, por favor ponerse en contacto con el dueño del vehiculo antes singularizado.</H2></br></br></br>"
+                                                    + "<H2><em> SYSTEM-POO-G2 </em></H2>";
+                                            Util.enviarEmail(ofs.get(e).getComprador().getCorreo(), mensaje);
+                                            Ingreso.eliminarIngreso(ingresos, v);
+                                            Oferta.eliminarOferta(ofertas, v);
+                                            Vehiculo.eliminarVehiculo(vehiculos, v);
+                                            break OUTER;
+                                        case "regresar":
+                                            break OUTER;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
                         }
